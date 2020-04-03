@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Loop</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-dark">
+  <div id="game">
+
+    <div id="main-menu" class="screen active">
+      <h1 class="display-2 text-center text-white pt-5">Main Menu</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-primary mt-5" onClick="navigate('level-selector');">New Game</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('settings');">Settings</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('high-scores');">High Scores</button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="navigate('about');">About</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="settings" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">Main Menu</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-primary mt-5" onClick="game.changeKey('up');">Up: <span id="control-up">ArrowUp</span></button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="game.changeKey('down');">Down: <span id="control-down">ArrowDown</span></button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="game.changeKey('left');">Left: <span id="control-left">ArrowLeft</span></button>
+          <button class="btn btn-lg btn-primary mt-4" onClick="game.changeKey('right');">Right: <span id="control-right">ArrowRight</span></button>
+          <button class="btn btn-lg btn-secondary mt-4" onClick="navigate('main-menu');">Back to Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="high-scores" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">High Scores</h1>
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <div name="high-score-1" class="btn btn-lg btn-success mt-5">Unclaimed</div>
+          <div name="high-score-2" class="btn btn-lg btn-info mt-4">Unclaimed</div>
+          <div name="high-score-3" class="btn btn-lg btn-primary mt-4">Unclaimed</div>
+          <div name="high-score-4" class="btn btn-lg btn-warning mt-4">Unclaimed</div>
+          <div name="high-score-5" class="btn btn-lg btn-danger mt-4 mb-5">Unclaimed</div>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+
+    <div id="about" class="screen">
+      <h2 class="display-2 text-center text-white pt-5">About</h2>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <h4 class="display-4 text-center text-white pt-4">
+            Created by:
+            <br>
+            Stuart Hopkins
+            <br>
+            <br>
+            Created for:
+            <br>
+            cs5410
+            <br>
+            ~
+            <br>
+            Game Dev
+          </h4>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+
+    <div id="level-selector" class="screen">
+      <h1 class="display-2 text-center text-white pt-5">Level Select</h1>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <button class="btn btn-lg btn-success mt-4" onClick="game.level = 1; navigate('game-play');">Level 1</button>
+          <button class="btn btn-lg btn-warning mt-4" onClick="game.level = 2; navigate('game-play');">Level 2</button>
+          <button class="btn btn-lg btn-secondary mt-4" onClick="navigate('main-menu');">Back to Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="game-play" class="screen">
+      <div class="d-flex justify-content-around bg-secondary">
+        <div class="p-2">Your Score: 
+          <span id="my-score"></span>
+        </div>
+        <div class="p-2">High Score: 
+          <span name="high-score"></span>
+        </div>
+        <div class="p-2">Time Left:
+          <span name="time-left"></span>
+        </div>
+      </div>
+      <canvas id="canvas-main" width="1024" height="1024"></canvas>
+      <button class="btn w-100 btn-secondary" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+    <div id="game-over" class="screen">
+      <div class="d-flex justify-content-around bg-secondary">
+        <div class="p-2">Your Score: 
+          <span id="my-prev-score"></span>
+        </div>
+        <div class="p-2">High Score: 
+          <span name="high-score"></span>
+        </div>
+        <div class="p-2">Time: 
+          <span id="prev-timer"></span>
+        </div>
+      </div>
+
+      <h1 class="display-2 text-center text-white pt-5">High Scores</h1>
+      <hr>
+
+      <div class="d-flex justify-content-center">
+        <div class="w-50 d-flex flex-column pt-5">
+          <div name="high-score-1" class="btn btn-lg btn-success mt-5">Unclaimed</div>
+          <div name="high-score-2" class="btn btn-lg btn-info mt-4">Unclaimed</div>
+          <div name="high-score-3" class="btn btn-lg btn-primary mt-4">Unclaimed</div>
+          <div name="high-score-4" class="btn btn-lg btn-warning mt-4">Unclaimed</div>
+          <div name="high-score-5" class="btn btn-lg btn-danger mt-4 mb-5">Unclaimed</div>
+        </div>
+      </div>
+
+      <button class="btn w-100 btn-secondary mt-5" onClick="navigate('main-menu');">Main Menu</button>"
+    </div>
+
+  </div>
+
+  <script src="./script/navigation.js"></script>
+  <script src="./script/random.js"></script>
+  <script src="./script/particle-system.js"></script>
+  <script src="./script/stats.js"></script>
+
+  <script src="./script/initialize.js"></script>
+  <script src="./script/settings.js"></script>
+  <script src="./script/collision.js"></script>
+  <script src="./script/terrain.js"></script>
+  <script src="./script/graphics.js"></script>
+  <script src="./script/gameLoop.js"></script>
+  <script src="./script/images.js"></script>
+
+</body>
+</html>
