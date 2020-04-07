@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="bg-dark">
+<body class="bg-dark" onload="initialize()">
   <div id="game">
 
     <div id="main-menu" class="screen active">
@@ -115,6 +115,7 @@
       <canvas id="canvas-main" width="1024" height="1024"></canvas>
       <button class="btn w-100 btn-secondary" onClick="navigate('main-menu');">Main Menu</button>"
     </div>
+
 
     <div id="game-over" class="screen">
       <div class="d-flex justify-content-around bg-secondary">

@@ -11,12 +11,12 @@ let path = require('path');
 let fs = require('fs');
 
 let mimeTypes = {
-    '.js' : 'text/javascript',
-    '.html' : 'text/html',
-    '.css' : 'text/css',
-    '.png' : 'image/png',
-    '.jpg' : 'image/jpeg',
-    '.mp3' : 'audio/mpeg3'
+    '.js'   :  'text/javascript',
+    '.html' :  'text/html',
+    '.css'  :  'text/css',
+    '.png'  :  'image/png',
+    '.jpg'  :  'image/jpeg',
+    '.mp3'  :  'audio/mpeg3'
 };
 const port = 3000;
 

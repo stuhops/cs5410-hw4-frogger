@@ -2,7 +2,7 @@ MyGame = {
     assets: {}
 };
 
-(function initialize() {
+function initialize() {
     //------------------------------------------------------------------
     //
     // This function is used to asynchronously load image and audio assets.
@@ -105,4 +105,4 @@ MyGame = {
             console.log('error: ', error);
         }
     );
-}());
+};
