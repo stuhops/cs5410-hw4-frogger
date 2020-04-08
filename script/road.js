@@ -15,6 +15,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
     }
   }
   road.rows = [];
+  road.offsets = {
+    speed: 80,
+    width: 75,
+    freq: 1500,
+  };
 
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
@@ -25,75 +30,78 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 0 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        -70,  // speedInPixelsPerSecond
+        -2 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [false],  // obstacleSafeArr
-        [75], // obstacleWidthArr
-        [2000, 4000]   // freqArr
+        [2 * road.offsets.width], // obstacleWidthArr
+        [2 * road.offsets.freq, 4 * road.offsets.freq]   // freqArr
         // [row0car]  // obstacleImgSrcArr
       )
     );
 
-    // // Row 1
-    // road.rows.push(
-    //   game.createObstacleRow(
-    //     road.pos.x,  // x
-    //     road.pos.y + 1 * (road.height / ROWS),  // y
-    //     road.width,  // width
-    //     road.height / ROWS,  // height
-    //     60,  // speedInPixelsPerSecond
-    //     true,  // safe
-    //     [false],  // obstacleSafeArr
-    //     [50], // obstacleWidthArr
-    //     [3000]   // freqArr
-    //     // [row0car]  // obstacleImgSrcArr
-    //   )
-    // );
-    // road.rows.push(
-    //   game.createObstacleRow(
-    //     road.pos.x,  // x
-    //     road.pos.y + 1 * (road.height / ROWS),  // y
-    //     road.width,  // width
-    //     road.height / ROWS,  // height
-    //     [row1car],  // obstacleImgSrcArr
-    //     60,  // speedInPixelsPerSecond
-    //     true,  // safe
-    //     [false],  // obstacleSafeArr
-    //     [3000]   // freqArr
-    //   )
-    // );
+    // Row 1
+    road.rows.push(
+      game.createObstacleRow(
+        road.pos.x,  // x
+        road.pos.y + 1 * (road.height / ROWS),  // y
+        road.width,  // width
+        road.height / ROWS,  // height
+        1.75 * road.offsets.speed,  // speedInPixelsPerSecond
+        true,  // safe
+        [false],  // obstacleSafeArr
+        [1 * road.offsets.width], // obstacleWidthArr
+        [5 * road.offsets.freq]   // freqArr
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 2
-    // road.rows.push(
-    //   game.createObstacleRow(
-    //     road.pos.x,  // x
-    //     road.pos.y + 2 * (road.height / ROWS),  // y
-    //     road.width,  // width
-    //     road.height / ROWS,  // height
-    //     [row2car],  // obstacleImgSrcArr
-    //     -40,  // speedInPixelsPerSecond
-    //     true,  // safe
-    //     [false],  // obstacleSafeArr
-    //     [1000, 1000, 2000]   // freqArr
-    //   )
-    // );
+    // Row 2
+    road.rows.push(
+      game.createObstacleRow(
+        road.pos.x,  // x
+        road.pos.y + 2 * (road.height / ROWS),  // y
+        road.width,  // width
+        road.height / ROWS,  // height
+        -1.6 * road.offsets.speed,  // speedInPixelsPerSecond
+        true,  // safe
+        [false],  // obstacleSafeArr
+        [.75 * road.offsets.width], // obstacleWidthArr
+        [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 3
-    // road.rows.push(
-    //   game.createObstacleRow(
-    //     road.pos.x,  // x
-    //     road.pos.y + 3 * (road.height / ROWS),  // y
-    //     road.width,  // width
-    //     road.height / ROWS,  // height
-    //     [row3car],  // obstacleImgSrcArr
-    //     50,  // speedInPixelsPerSecond
-    //     true,  // safe
-    //     [false],  // obstacleSafeArr
-    //     [1000, 1000, 2000]   // freqArr
-    //   )
-    // );
+    // Row 3
+    road.rows.push(
+      game.createObstacleRow(
+        road.pos.x,  // x
+        road.pos.y + 3 * (road.height / ROWS),  // y
+        road.width,  // width
+        road.height / ROWS,  // height
+        1.6 * road.offsets.speed,  // speedInPixelsPerSecond
+        true,  // safe
+        [false],  // obstacleSafeArr
+        [.75 * road.offsets.width], // obstacleWidthArr
+        [2.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 4
+    // Row 4
+    road.rows.push(
+      game.createObstacleRow(
+        road.pos.x,  // x
+        road.pos.y + 4 * (road.height / ROWS),  // y
+        road.width,  // width
+        road.height / ROWS,  // height
+        -1.7 * road.offsets.speed,  // speedInPixelsPerSecond
+        true,  // safe
+        [false],  // obstacleSafeArr
+        [.75 * road.offsets.width], // obstacleWidthArr
+        [2 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
     // road.rows.push(
     //   game.createObstacleRow(
     //     road.pos.x,  // x
