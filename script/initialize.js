@@ -20,11 +20,13 @@ let game = {
 
   // ---------- Game State -------------
   level: 1,
-  levels: 2,
+  levels: 1,
   gameOver: false,
   score: 100,
 
   // ---------- Game Vars --------------
+  rows: 14,
+  obstacles: [],
 
   // --------- High Scores -------------
   highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
@@ -58,6 +60,13 @@ document.getElementById('control-right').innerHTML = game.right;
 
 function newGame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
+
+  game.road = game.createRoad(
+    0,  // x
+    parseInt(game.rows / 2 + 1) * (game.gameHeight / game.rows),  // y
+    game.gameWidth,  // width
+    game.gameHeight / rows  // height
+  );
 
   game.gameLoop.start();
 }

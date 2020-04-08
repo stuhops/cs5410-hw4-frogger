@@ -10,11 +10,13 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     game.domStats.update;
+    game.road.update(elapsedTime);
   }
 
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    game.road.render();
   }
 
 

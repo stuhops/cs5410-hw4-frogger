@@ -1,4 +1,4 @@
-MyGame = {
+game = {
     assets: {}
 };
 
@@ -78,16 +78,17 @@ function initialize() {
         }
     );
     require(
-        ['settings', 'collision', 'terrain', 'graphics', 'gameLoop', 'images'],
-        function() {        // on success
+        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road'],
+        function() {  // on success
             console.log('settings.js loaded');
             console.log('collision.js loaded');
-            console.log('terrrain.js loaded');
             console.log('graphics.js loaded');
             console.log('gameLoop.js loaded');
             console.log('images.js loaded');
+            console.log('obstacle.js loaded');
+            console.log('road.js loaded');
         },
-        function(error) {   // on failure
+        function(error) {  // on failure
             console.log('error: ', error);
         }
     );
@@ -95,11 +96,11 @@ function initialize() {
     //
     // Load the fire.png asset
     loadAsset(
-        '/assets/fire.png',
+        '../assets/fire.png',
         function(asset) {
             console.log('fire.png loaded');
             console.log('asset: ', asset);
-            MyGame.assets['fire'] = asset;
+            game.assets['fire'] = asset;
         },
         function(error) {
             console.log('error: ', error);

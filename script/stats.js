@@ -31,7 +31,7 @@ game.domStats = function () {
 }();
 
 
-game.manageHightScores = function (newScore) {
+function manageHighScores(newScore) {
   if(newScore) {
     for(let i = 0; i < game.highScores.length; i++) {
       if(game.highScores[i] === 'Unclaimed' || newScore > game.highScores[i]) {
