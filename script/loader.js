@@ -78,7 +78,7 @@ function initialize() {
         }
     );
     require(
-        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road'],
+        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road', 'river'],
         function() {  // on success
             console.log('settings.js loaded');
             console.log('collision.js loaded');
@@ -87,6 +87,7 @@ function initialize() {
             console.log('images.js loaded');
             console.log('obstacle.js loaded');
             console.log('road.js loaded');
+            console.log('river.js loaded');
         },
         function(error) {  // on failure
             console.log('error: ', error);

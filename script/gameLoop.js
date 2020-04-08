@@ -10,12 +10,14 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     // game.domStats.update;
+    game.river.update(elapsedTime);
     game.road.update(elapsedTime);
   }
 
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    game.river.render();
     game.road.render();
   }
 
