@@ -28,12 +28,27 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         -70,  // speedInPixelsPerSecond
         true,  // safe
         [false],  // obstacleSafeArr
-        [1000, 2000]   // freqArr
+        [75], // obstacleWidthArr
+        [2000, 4000]   // freqArr
         // [row0car]  // obstacleImgSrcArr
       )
     );
 
     // // Row 1
+    // road.rows.push(
+    //   game.createObstacleRow(
+    //     road.pos.x,  // x
+    //     road.pos.y + 1 * (road.height / ROWS),  // y
+    //     road.width,  // width
+    //     road.height / ROWS,  // height
+    //     60,  // speedInPixelsPerSecond
+    //     true,  // safe
+    //     [false],  // obstacleSafeArr
+    //     [50], // obstacleWidthArr
+    //     [3000]   // freqArr
+    //     // [row0car]  // obstacleImgSrcArr
+    //   )
+    // );
     // road.rows.push(
     //   game.createObstacleRow(
     //     road.pos.x,  // x
