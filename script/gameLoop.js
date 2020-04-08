@@ -10,6 +10,7 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     // game.domStats.update;
+    game.winRow.update(elapsedTime);
     game.river.update(elapsedTime);
     game.middleLand.update(elapsedTime);
     game.road.update(elapsedTime);
@@ -19,6 +20,7 @@ game.gameLoop = function() {
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    game.winRow.render();
     game.river.render();
     game.middleLand.render();
     game.road.render();

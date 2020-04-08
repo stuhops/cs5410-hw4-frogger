@@ -61,6 +61,15 @@ document.getElementById('control-right').innerHTML = game.right;
 function newGame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+// game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr) {
+  game.winRow = game.createWinRow(
+    0,  // x
+    0,  // y
+    game.gameWidth,  // width
+    game.gameHeight / game.rows * 2 // height
+    // fillImgSrc
+    // obstacleImgSrcArr
+  );
   game.river = game.createRiver(
     0,  // x
     2 * (game.gameHeight / game.rows),  // y
