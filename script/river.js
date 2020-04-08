@@ -15,11 +15,11 @@ game.createRiver = function(x, y, width, height, imgSrc) {
     }
   }
   river.rows = [];
-  river.safe = true;
+  river.safe = false;
   let mainOffset = 2;
   river.offsets = {
     speed: 80 / mainOffset,
-    width: 200,
+    width: 100,
     freq: 1700 * mainOffset,
     time: 1696,
   };
@@ -33,11 +33,11 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 0 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        -2 * river.offsets.speed,  // speedInPixelsPerSecond
-        true,  // safe
-        [false],  // obstacleSafeArr
-        [2 * river.offsets.width], // obstacleWidthArr
-        [2 * river.offsets.freq, 5 * river.offsets.freq],   // freqArr
+        2 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [true],  // obstacleSafeArr
+        [3.7 * river.offsets.width], // obstacleWidthArr
+        [2 * river.offsets.freq],   // freqArr
         0 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -50,11 +50,17 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 1 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        1.75 * river.offsets.speed,  // speedInPixelsPerSecond
-        true,  // safe
-        [false],  // obstacleSafeArr
-        [1 * river.offsets.width], // obstacleWidthArr
-        [6 * river.offsets.freq],   // freqArr
+        -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [false, false, true, true, true, true, true, true, true, true,],  // obstacleSafeArr
+        [.5 * river.offsets.width], // obstacleWidthArr
+        [
+          1.5 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+        ],   // freqArr
         1 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -67,11 +73,11 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 2 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
-        true,  // safe
-        [false],  // obstacleSafeArr
-        [.75 * river.offsets.width], // obstacleWidthArr
-        [4 * river.offsets.freq, 1 * river.offsets.freq, 1 * river.offsets.freq],   // freqArr
+        4 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [true],  // obstacleSafeArr
+        [4 * river.offsets.width], // obstacleWidthArr
+        [1.5 * river.offsets.freq],   // freqArr
         2 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -84,9 +90,9 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 3 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        1.6 * river.offsets.speed,  // speedInPixelsPerSecond
-        true,  // safe
-        [false],  // obstacleSafeArr
+        -1.5 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [true],  // obstacleSafeArr
         [.75 * river.offsets.width], // obstacleWidthArr
         [3.5 * river.offsets.freq, 1 * river.offsets.freq, 1 * river.offsets.freq],   // freqArr
         3 * river.offsets.time
@@ -101,9 +107,9 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 4 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        -1.7 * river.offsets.speed,  // speedInPixelsPerSecond
-        true,  // safe
-        [false],  // obstacleSafeArr
+        1.7 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [true],  // obstacleSafeArr
         [.75 * river.offsets.width], // obstacleWidthArr
         [3 * river.offsets.freq, 1 * river.offsets.freq, 1 * river.offsets.freq],   // freqArr
         4 * river.offsets.time

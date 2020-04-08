@@ -61,7 +61,7 @@ document.getElementById('control-right').innerHTML = game.right;
 function newGame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  game.river = game.createRoad(
+  game.river = game.createRiver(
     0,  // x
     2 * (game.gameHeight / game.rows),  // y
     game.gameWidth,  // width

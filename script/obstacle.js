@@ -185,18 +185,18 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     if(row.frequency.timer < 0) {
       // Generate new obstacle
       let newObstacle = game.createObstacle(
-        row.obstacleWidth.arr[row.obstacleWidth.iterator], 
-        row.height,
-        row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] : row.width, 
-        row.pos.y, 
-        row.speed,
-        row.obstacleSafe.arr[row.obstacleSafe.arr.iterator],
-        // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]
+        row.obstacleWidth.arr[row.obstacleWidth.iterator],  // width
+        row.height,  // height
+        row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] : row.width,  // x
+        row.pos.y,  // y
+        row.speed,  // speedInPixelsPerSecond
+        row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
+        // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
       );
       row.obstacles.push(newObstacle);
 
       // Restart timer
-      row.obstacleSafe.iterator = (row.safe.iterator + 1) % row.obstacleSafe.arr.length;
+      row.obstacleSafe.iterator = (row.obstacleSafe.iterator + 1) % row.obstacleSafe.arr.length;
       row.obstacleWidth.iterator = (row.obstacleWidth.iterator + 1) % row.obstacleWidth.arr.length;
       // row.obstacleImgSrc.iterator = (row.obstacleImgSrc.iterator + 1) % row.obstacleImgSrc.arr.length;
       row.frequency.iterator = (row.frequency.iterator + 1) % row.frequency.arr.length;
