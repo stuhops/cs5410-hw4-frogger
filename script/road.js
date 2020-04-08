@@ -15,6 +15,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
     }
   }
   road.rows = [];
+  road.safe = true;
   let mainOffset = 2;
   road.offsets = {
     speed: 80 / mainOffset,
@@ -155,8 +156,8 @@ game.createRoad = function(x, y, width, height, imgSrc) {
   function drawHitbox_ (context) {
     let hitbox = getHitbox_();
 
-    context.strokeStyle = 'white';
-    context.fillStyle = 'black';
+    context.strokeStyle = road.safe ? 'black' : 'white';
+    context.fillStyle = road.safe ? 'green' : 'red';
     context.lineWidth = 6;
     context.beginPath();
     context.moveTo(hitbox[0].x, hitbox[0].y);

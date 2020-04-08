@@ -1,5 +1,5 @@
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Obstacle >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe=true, imgSrc) {
+game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe, imgSrc) {
   let obstacle = {};
 
   // if(imgSrc) obstacle = loadImage(imSrc);
@@ -49,8 +49,8 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   let drawHitbox_ = context => {
     let hitbox = getHitbox();
 
-    context.strokeStyle = 'white';
-    context.fillStyle = 'black';
+    context.strokeStyle = obstacle.safe ? 'black' : 'white';
+    context.fillStyle = obstacle.safe ? 'green' : 'red';
     context.lineWidth = 6;
     context.beginPath();
     context.moveTo(hitbox[0].x, hitbox[0].y);
