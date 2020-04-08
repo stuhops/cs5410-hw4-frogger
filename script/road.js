@@ -15,10 +15,12 @@ game.createRoad = function(x, y, width, height, imgSrc) {
     }
   }
   road.rows = [];
+  let mainOffset = 2;
   road.offsets = {
-    speed: 80,
+    speed: 80 / mainOffset,
     width: 75,
-    freq: 1500,
+    freq: 1700 * mainOffset,
+    time: 1696,
   };
 
   // ------------------------------- Initialize From Level --------------------------------
@@ -34,7 +36,8 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         true,  // safe
         [false],  // obstacleSafeArr
         [2 * road.offsets.width], // obstacleWidthArr
-        [2 * road.offsets.freq, 4 * road.offsets.freq]   // freqArr
+        [2 * road.offsets.freq, 5 * road.offsets.freq],   // freqArr
+        0 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
@@ -50,7 +53,8 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         true,  // safe
         [false],  // obstacleSafeArr
         [1 * road.offsets.width], // obstacleWidthArr
-        [5 * road.offsets.freq]   // freqArr
+        [6 * road.offsets.freq],   // freqArr
+        1 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
@@ -66,7 +70,8 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         true,  // safe
         [false],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        [4 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        2 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
@@ -82,7 +87,8 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         true,  // safe
         [false],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [2.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        [3.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        3 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
@@ -98,23 +104,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         true,  // safe
         [false],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [2 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq]   // freqArr
+        [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        4 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
-    // road.rows.push(
-    //   game.createObstacleRow(
-    //     road.pos.x,  // x
-    //     road.pos.y + 4 * (road.height / ROWS),  // y
-    //     road.width,  // width
-    //     road.height / ROWS,  // height
-    //     [row4car],  // obstacleImgSrcArr
-    //     -50,  // speedInPixelsPerSecond
-    //     true,  // safe
-    //     [false],  // obstacleSafeArr
-    //     [1000, 1000, 2000]   // freqArr
-    //   )
-    // );
   } 
   else { console.log(`Level ${game.level} is not created.`)}
 
@@ -125,6 +119,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
   }
 
   function render() { 
+    drawHitbox_(game.context);
     renderRows_();
   }
 
@@ -157,6 +152,33 @@ game.createRoad = function(x, y, width, height, imgSrc) {
     }
   }
 
+  function drawHitbox_ (context) {
+    let hitbox = getHitbox_();
+
+    context.strokeStyle = 'white';
+    context.fillStyle = 'black';
+    context.lineWidth = 6;
+    context.beginPath();
+    context.moveTo(hitbox[0].x, hitbox[0].y);
+
+    for(let i = 1; i < hitbox.length; i++) {
+      context.lineTo(hitbox[i].x, hitbox[i].y);
+    }
+
+    context.closePath();
+    context.stroke();
+    context.fill();
+  }
+
+  function getHitbox_() {
+    return [
+      road.pos,
+      { x: road.pos.x + road.width, y: road.pos.y }, 
+      { x: road.pos.x + road.width, y: road.pos.y + road.height },
+      { x: road.pos.x, y: road.pos.y + road.height },
+      road.pos
+    ];
+  }
 
   // -------------------------------------- Return ----------------------------------------
   return ({

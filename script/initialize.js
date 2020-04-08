@@ -65,7 +65,7 @@ function newGame() {
     0,  // x
     parseInt(game.rows / 2 + 1) * (game.gameHeight / game.rows),  // y
     game.gameWidth,  // width
-    game.gameHeight / game.rows  // height
+    game.gameHeight / game.rows * 5 // height
   );
 
   game.gameLoop.start();

@@ -31,11 +31,11 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   // -------------------------------- Getters and Setters----------------------------------
   let isSafe = () => obstacle.safe;
   let getHitbox = () => [
-    obstacle.pos,
-    { x: obstacle.pos.x + obstacle.width, y: obstacle.pos.y }, 
-    { x: obstacle.pos.x + obstacle.width, y: obstacle.pos.y + obstacle.height },
-    { x: obstacle.pos.x, y: obstacle.pos.y + obstacle.height },
-    obstacle.pos
+    { x: obstacle.pos.x, y: obstacle.pos.y + obstacle.height / 8}, 
+    { x: obstacle.pos.x + obstacle.width, y: obstacle.pos.y + obstacle.height / 8}, 
+    { x: obstacle.pos.x + obstacle.width, y: obstacle.pos.y + obstacle.height - obstacle.height / 8},
+    { x: obstacle.pos.x, y: obstacle.pos.y + obstacle.height - obstacle.height / 8},
+    { x: obstacle.pos.x, y: obstacle.pos.y + obstacle.height / 8}, 
   ];
   let getCenter = () => { 
     updateCenter_();
@@ -101,7 +101,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Obstacle Row >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, safe, obstacleSafeArr, obstacleWidthArr, freqArr, fillImgSrc, obstacleImgSrcArr) {
+game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, safe, obstacleSafeArr, obstacleWidthArr, freqArr, timeOffset=0, fillImgSrc, obstacleImgSrcArr) {
   let row = {};
   // if(imgSrc) row = loadImage(fillImgSrc);
 
@@ -133,7 +133,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
   row.frequency = {
     arr: freqArr,
     iterator: 0,
-    timer: 0,
+    timer: timeOffset,
   };
   row.obstacles = [];
 
