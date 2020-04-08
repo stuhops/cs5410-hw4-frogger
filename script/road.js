@@ -1,9 +1,9 @@
-game.createRoad = function(x, y, width, height) {
+game.createRoad = function(x, y, width, height, imgSrc) {
   // ----------------------------------- Initialize ---------------------------------------
   const ROWS = 5;
   let road = {};
 
-  if(imgSrc) road = loadImage(imSrc);
+  // if(imgSrc) road = loadImage(imSrc);
   road.width = width;
   road.height = height;
   road.pos = {
@@ -25,11 +25,11 @@ game.createRoad = function(x, y, width, height) {
         road.pos.y + 0 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        [row0car],  // obstacleImgSrcArr
         -70,  // speedInPixelsPerSecond
         true,  // safe
         [false],  // obstacleSafeArr
         [1000, 2000]   // freqArr
+        // [row0car]  // obstacleImgSrcArr
       )
     );
 

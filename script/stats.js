@@ -1,4 +1,4 @@
-game.domStats = function () {
+function domStats() {
 
   function update(elapsedTime) {
     updateTime(elapsedTime);  
@@ -28,7 +28,7 @@ game.domStats = function () {
   return {
     update,
   }
-}();
+};
 
 
 function manageHighScores(newScore) {

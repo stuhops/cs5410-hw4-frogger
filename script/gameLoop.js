@@ -9,7 +9,7 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
-    game.domStats.update;
+    // game.domStats.update;
     game.road.update(elapsedTime);
   }
 
