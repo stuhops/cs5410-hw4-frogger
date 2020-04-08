@@ -140,8 +140,8 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
   }
 
   function render() {
-    for(obstacle in row.obstacles) {
-      obstacle.render();
+    for(let i = 0; i < row.obstacles.length; i++) {
+      row.obstacles[i].render();
     }
 
   }
@@ -160,9 +160,8 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
 
   function updateObstacles_(elapsedTime) {
     for(let i = 0; i < row.obstacles.length; i++) {
-      obstacles[i].update(elapsedTime);
-      hitbox = obstacles[i].getHitbox();
-      console.log(hitbox);
+      row.obstacles[i].update(elapsedTime);
+      hitbox = row.obstacles[i].getHitbox();
       for(let j = 0; j < hitbox.length; j++) {
         if(!(hitbox[j].x < 0 || hitbox[j].x > row.width))
           break;
@@ -186,6 +185,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
         row.obstacleSafe.arr[row.obstacleSafe.arr.iterator],
         // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]
       );
+      row.obstacles.push(newObstacle);
 // game.obstacle = function(width, x, y, imgSrc, speedInPixelsPerSecond, safe=true) {
 
       // Restart timer
