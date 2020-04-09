@@ -4,6 +4,17 @@ game.gameLoop = function() {
 
   function processInput() {
     for(input in inputBuffer) {
+      if(input === game.up)
+        game.char.setMove('up');
+
+      else if(input === game.down)
+        game.char.setMove('down');
+
+      else if(input === game.right)
+        game.char.setMove('right');
+
+      else if(input === game.left)
+        game.char.setMove('left');
     }
   }
 
@@ -15,6 +26,7 @@ game.gameLoop = function() {
     game.middleLand.update(elapsedTime);
     game.road.update(elapsedTime);
     game.startLand.update(elapsedTime);
+    game.char.update(elapsedTime);
   }
 
 
@@ -25,6 +37,7 @@ game.gameLoop = function() {
     game.middleLand.render();
     game.road.render();
     game.startLand.render();
+    game.char.render();
   }
 
 

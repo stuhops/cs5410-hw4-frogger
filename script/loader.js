@@ -78,7 +78,7 @@ function initialize() {
         }
     );
     require(
-        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road', 'river', 'land', 'winRow'],
+        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road', 'river', 'land', 'winRow', 'character'],
         function() {  // on success
             console.log('settings.js loaded');
             console.log('collision.js loaded');

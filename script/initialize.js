@@ -42,15 +42,15 @@ let game = {
   // ------------ Images ---------------
 };
 
-if(JSON.parse(window.localStorage.getItem('midterm-high-scores')) !== null)
-  game.highScores = JSON.parse(window.localStorage.getItem('midterm-high-scores'));
+if(JSON.parse(window.localStorage.getItem('frogger-high-scores')) !== null)
+  game.highScores = JSON.parse(window.localStorage.getItem('frogger-high-scores'));
 manageHighScores();
 
-if(JSON.parse(window.localStorage.getItem('midterm-controls')) !== null) {
-  game.up = JSON.parse(window.localStorage.getItem('midterm-controls')).up;
-  game.down = JSON.parse(window.localStorage.getItem('midterm-controls')).down;
-  game.left = JSON.parse(window.localStorage.getItem('midterm-controls')).left;
-  game.right = JSON.parse(window.localStorage.getItem('midterm-controls')).right;
+if(JSON.parse(window.localStorage.getItem('frogger-controls')) !== null) {
+  game.up = JSON.parse(window.localStorage.getItem('frogger-controls')).up;
+  game.down = JSON.parse(window.localStorage.getItem('frogger-controls')).down;
+  game.left = JSON.parse(window.localStorage.getItem('frogger-controls')).left;
+  game.right = JSON.parse(window.localStorage.getItem('frogger-controls')).right;
 }
 
 document.getElementById('control-up').innerHTML = game.up;
@@ -61,7 +61,15 @@ document.getElementById('control-right').innerHTML = game.right;
 function newGame() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-// game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr) {
+// game.createCharacter = function(width, height, centerX, centerY, moveDist, moveTime) {
+  game.char = game.createCharacter(
+    game.gameHeight / game.rows,  // width
+    game.gameHeight / game.rows,  // height
+    game.gameWidth / 2,  // centerX
+    (game.rows - .5) * game.gameHeight / game.rows,  // centerY
+    game.gameHeight / game.rows,  // moveDist
+    250  // moveTime
+  );
   game.winRow = game.createWinRow(
     0,  // x
     0,  // y
