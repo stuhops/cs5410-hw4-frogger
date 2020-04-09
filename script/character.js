@@ -122,7 +122,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       else {
         char.move.timer = 0;
         char.move.dir = 0;
-        char.pos.x = char.pos.nextCenter.x;
+        char.pos.nextCenter.x = char.pos.x
         char.pos.y = char.pos.nextCenter.y;
       }
     }
