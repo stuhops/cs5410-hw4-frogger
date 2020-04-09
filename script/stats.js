@@ -37,7 +37,7 @@ function manageHighScores(newScore) {
       if(game.highScores[i] === 'Unclaimed' || newScore > game.highScores[i]) {
         game.highScores.splice(i, 0, newScore);
         game.highScores.pop();
-        window.localStorage.setItem('midterm-high-scores', JSON.stringify(game.highScores));
+        window.localStorage.setItem('frogger-high-scores', JSON.stringify(game.highScores));
         break;
       }
     }
