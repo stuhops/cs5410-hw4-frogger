@@ -34,9 +34,9 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
     iterator: 0,
   };
   row.slot = {
-    width: row.width / 11,
+    width: row.width / 22,
     height: row.height * 3/4,
-    spacingOffset: row.width / 22,
+    spacingOffset: 3*row.width / 44,
     spacing: row.width / 22 * 4.5,
   }
   row.obstacles = [];
@@ -66,7 +66,7 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
 
         for(let j = 0; j < hitbox.length - 1; j++) {
           if(game.collision.lineCircleIntersection(hitbox[j], hitbox[j+1], hitCircle)) {
-            return ({ type: 3, deltaX: 0 });
+            return ({ type: 3, deltaX: 0, index: i });
           }
         }
       }
@@ -75,7 +75,7 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
     return({ type: 1, deltaX: 0 })
   }
 
-
+  let setIdxDone = idx => row.obstacles[idx].setSafe(false);
   // --------------------------------- Private Functions ----------------------------------
   let updateCenter_ = () => {
     obstacle.pos.center = {
@@ -158,5 +158,6 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
     render,
 
     getCollisionType,
+    setIdxDone,
   });
 }

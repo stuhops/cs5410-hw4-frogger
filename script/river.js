@@ -140,7 +140,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
   function getCollisionType(hitCircle) {
     let row = parseInt((hitCircle.center.y - river.pos.y) / (river.height / river.rows.length));
 
-    if(row >= 0 && row < river.rows.length) {
+    if(row >= 0 && row < river.rows.length && !Object.is(row, -0)) {
       let collision = river.rows[row].getCollisionType(hitCircle);
       return collision;
     }

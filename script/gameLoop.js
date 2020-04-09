@@ -38,6 +38,7 @@ game.gameLoop = function() {
       if(!(winRowCol.type * riverCol.type * roadCol.type)) {
         game.winRow.getCollisionType(hitCircle);
         console.log("SPLAT!! End game");
+        game.won = false;
         game.gameOver = true;
       }
       else if (riverCol.type === 2) {
@@ -46,6 +47,16 @@ game.gameLoop = function() {
       }
       else if (winRowCol.type === 3) {
         console.log('Winner!!!!!');
+        game.winRow.setIdxDone(winRowCol.index);
+        game.char = game.createCharacter(
+          .5 * game.gameHeight / game.rows,  // radius
+          game.gameWidth / 2,  // centerX
+          (game.rows - .5) * game.gameHeight / game.rows,  // centerY
+          game.gameHeight / game.rows,  // moveDist
+          250  // moveTime
+        );
+        // game.won = true;
+        // game.gameOver = true;
       }
     } 
   }

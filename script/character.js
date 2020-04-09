@@ -21,18 +21,21 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     },
   };
   char.move = {
-    dir: 0,
+    dir: 2,
     baseTimer: moveTime,
     dist: moveDist,
     ppms: moveDist / moveTime,
-    timer: 0,
+    timer: 500,
     environmentDelta: 0,
   }
+  char.done = false;
 
 
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) { 
-    move_(elapsedTime);
+    if(!char.done) {
+      move_(elapsedTime);
+    }
   }
 
   function render() { 
@@ -85,7 +88,11 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       char.move.timer = char.move.baseTimer;
     }
   }
-
+  let setDone = (bool, x=char.pos.nextCenter.x, y=char.pos.nextCenter.y) => {
+    char.pos.x = x;
+    char.pos.y = y;
+    char.done = bool;
+  }
   let setDeltaX = delta => char.move.environmentDelta = delta;
 
   // --------------------------------- Private Functions ----------------------------------
@@ -157,6 +164,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     getCenter,
 
     setMove,
+    setDone,
     setDeltaX,
   });
 }
