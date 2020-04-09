@@ -137,6 +137,16 @@ game.createRiver = function(x, y, width, height, imgSrc) {
 
 
   // -------------------------------- Getters and Setters----------------------------------
+  function getCollisionType(hitCircle) {
+    let row = parseInt((hitCircle.center.y - river.pos.y) / (river.height / river.rows.length));
+
+    if(row >= 0 && row < river.rows.length) {
+      let collision = river.rows[row].getCollisionType(hitCircle);
+      return collision;
+    }
+
+    return ({ type: 1, deltaX: 0 });
+  }
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -200,5 +210,6 @@ game.createRiver = function(x, y, width, height, imgSrc) {
 
     // Helper Functions
     // Getters and Setters
+    getCollisionType,
   });
 }

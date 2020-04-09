@@ -53,6 +53,7 @@ game.createLand = function(x, y, width, height, imgSrc) {
 
 
   // -------------------------------- Getters and Setters----------------------------------
+  let isCollision = () => false;
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -116,5 +117,6 @@ game.createLand = function(x, y, width, height, imgSrc) {
 
     // Helper Functions
     // Getters and Setters
+    isCollision,
   });
 }

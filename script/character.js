@@ -43,8 +43,8 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   let getHitCircle = () => { 
     return ({
       center: {
-        x: char.x, 
-        y: char.y, 
+        x: char.pos.x, 
+        y: char.pos.y, 
       },
       radius: char.radius, 
     })

@@ -126,6 +126,31 @@ game.createRoad = function(x, y, width, height, imgSrc) {
 
 
   // -------------------------------- Getters and Setters----------------------------------
+  function getCollisionType(hitCircle) {
+    let row = parseInt((hitCircle.center.y - road.pos.y) / (road.height / road.rows.length));
+
+    if(row >= 0 && row <= road.rows.length) {
+      if(row > 0) {
+        let collision = road.rows[row - 1].getCollisionType(hitCircle);
+        if(collision.type !== 1)
+          return collision;
+      }
+
+      if(row < road.rows.length) {
+        let collision = road.rows[row].getCollisionType(hitCircle);
+        if(collision.type !== 1)
+          return collision;
+      }
+
+      if(row + 1 < road.rows.length) {
+        let collision = road.rows[row + 1].getCollisionType(hitCircle);
+        if(collision.type !== 1)
+          return collision;
+      }
+    }
+
+    return ({ type: 1, deltaX: 0 });
+  }
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -188,6 +213,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
     render,
 
     // Helper Functions
+    getCollisionType,
     // Getters and Setters
   });
 }

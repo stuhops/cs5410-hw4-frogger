@@ -41,6 +41,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     updateCenter_();
     return obstacle.pos.center;
   }
+  let getDeltaX = () => obstacle.speed;
 
   let setSafe = safe => obstacle.safe = safe;
 
@@ -93,6 +94,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     isSafe,
     getHitbox,
     getCenter,
+    getDeltaX,
 
     setSafe,
   });
@@ -154,6 +156,29 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
 
 
   // -------------------------------- Getters and Setters----------------------------------
+  function getCollisionType(hitCircle) {
+    for(let i = 0; i < row.obstacles.length; i++) {
+      let obst = row.obstacles[i];
+      let hitbox = obst.getHitbox();
+
+      for(let j = 0; j < hitbox.length - 1; j++) {
+        if(game.collision.lineCircleIntersection(hitbox[j], hitbox[j+1], hitCircle)) {
+          if(obst.isSafe()) {
+            return ({ type: 2, deltaX: obst.getDeltaX() });
+          }
+          else {
+            return ({ type: 0, deltaX: 0 });
+          }
+        }
+      }
+
+    }
+    // If no collision return the safeness of the row
+    if(row.safe)
+      return({ type: 1, deltaX: 0 });
+    else
+      return({ type: 0, deltaX: 0 });
+  }
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -211,5 +236,6 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     update,
     render,
 
+    getCollisionType,
   });
 }

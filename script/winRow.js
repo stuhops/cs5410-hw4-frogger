@@ -58,6 +58,25 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
 
 
   // -------------------------------- Getters and Setters----------------------------------
+  function getCollisionType(hitCircle) {
+    // let row = parseInt(road.height / (hitCircle.center.y - road.pos.y));
+
+    // if(row >= 0 && row <= road.rows.length) {
+    //   if(row > 0)
+    //     if(!road.rows[row - 1].collisionType(hitCircle).type)
+    //       return ({ type: 0, deltaX: 0 });
+
+    //   if(row < road.rows.length)
+    //     if(!road.rows[row].collisionType(hitCircle).type)
+    //       return ({ type: 0, deltaX: 0 });
+
+    //   if(row < road.rows.length - 1)
+    //     if(!road.rows[row + 1].collisionType(hitCircle).type)
+    //       return ({ type: 0, deltaX: 0 });
+    // }
+
+    return ({ type: 1, deltaX: 0 });
+  }
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -141,5 +160,6 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
     update,
     render,
 
+    getCollisionType,
   });
 }

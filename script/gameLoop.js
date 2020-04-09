@@ -21,12 +21,31 @@ game.gameLoop = function() {
 
   function update(elapsedTime) {
     // game.domStats.update;
+    game.char.update(elapsedTime, game.charDeltaX);
     game.winRow.update(elapsedTime);
     game.river.update(elapsedTime);
     game.middleLand.update(elapsedTime);
     game.road.update(elapsedTime);
     game.startLand.update(elapsedTime);
-    game.char.update(elapsedTime);
+
+    // Check collision
+    // return ({
+    //   type: {
+    //     0: death,
+    //     1: nothing,
+    //     2: log_float,
+    //     3: win,
+    //   }
+    //   deltaX: sideways speed change for frog
+    // })
+    let hitCircle = game.char.getHitCircle();
+    let winRowCol = game.winRow.getCollisionType(hitCircle);
+    let riverCol = game.river.getCollisionType(hitCircle);
+    let roadCol = game.road.getCollisionType(hitCircle);
+
+    if(winRowCol.type !== 1) { console.log('Win Collision!', winRowCol); };
+    if(riverCol.type !== 1) { console.log('River Collision!', riverCol); };
+    if(roadCol.type !== 1) { console.log('Road Collision!', roadCol); };
   }
 
 
