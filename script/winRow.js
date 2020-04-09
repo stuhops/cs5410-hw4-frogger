@@ -59,23 +59,20 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
 
   // -------------------------------- Getters and Setters----------------------------------
   function getCollisionType(hitCircle) {
-    // let row = parseInt(road.height / (hitCircle.center.y - road.pos.y));
+    if(hitCircle.center.y < row.height) {
+      for(let i = 0; i < row.obstacles.length; i++) {
+        let obst = row.obstacles[i];
+        let hitbox = obst.getHitbox();
 
-    // if(row >= 0 && row <= road.rows.length) {
-    //   if(row > 0)
-    //     if(!road.rows[row - 1].collisionType(hitCircle).type)
-    //       return ({ type: 0, deltaX: 0 });
-
-    //   if(row < road.rows.length)
-    //     if(!road.rows[row].collisionType(hitCircle).type)
-    //       return ({ type: 0, deltaX: 0 });
-
-    //   if(row < road.rows.length - 1)
-    //     if(!road.rows[row + 1].collisionType(hitCircle).type)
-    //       return ({ type: 0, deltaX: 0 });
-    // }
-
-    return ({ type: 1, deltaX: 0 });
+        for(let j = 0; j < hitbox.length - 1; j++) {
+          if(game.collision.lineCircleIntersection(hitbox[j], hitbox[j+1], hitCircle)) {
+            return ({ type: 3, deltaX: 0 });
+          }
+        }
+      }
+      return({ type: 0, deltaX: 0 });
+    }
+    return({ type: 1, deltaX: 0 })
   }
 
 

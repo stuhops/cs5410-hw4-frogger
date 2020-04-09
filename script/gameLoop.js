@@ -36,6 +36,7 @@ game.gameLoop = function() {
 
     if(winRowCol.type !== 1 || riverCol.type !== 1 || roadCol.type !== 1) {
       if(!(winRowCol.type * riverCol.type * roadCol.type)) {
+        game.winRow.getCollisionType(hitCircle);
         console.log("SPLAT!! End game");
         game.gameOver = true;
       }
