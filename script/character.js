@@ -95,8 +95,8 @@ game.createCharacter = function(width, height, centerX, centerY, moveDist, moveT
   let drawHitbox_ = context => {
     let hitbox = getHitbox();
 
-    context.strokeStyle = char.safe ? 'black' : 'white';
-    context.fillStyle = char.safe ? 'green' : 'red';
+    context.strokeStyle = 'white';
+    context.fillStyle = 'black';
     context.lineWidth = 6;
     context.beginPath();
     context.moveTo(hitbox[0].x, hitbox[0].y);
