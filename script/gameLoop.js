@@ -28,24 +28,25 @@ game.gameLoop = function() {
     game.road.update(elapsedTime);
     game.startLand.update(elapsedTime);
 
-    // Check collision
-    // return ({
-    //   type: {
-    //     0: death,
-    //     1: nothing,
-    //     2: log_float,
-    //     3: win,
-    //   }
-    //   deltaX: sideways speed change for frog
-    // })
+    game.char.setDeltaX(0);
     let hitCircle = game.char.getHitCircle();
     let winRowCol = game.winRow.getCollisionType(hitCircle);
     let riverCol = game.river.getCollisionType(hitCircle);
     let roadCol = game.road.getCollisionType(hitCircle);
 
-    if(winRowCol.type !== 1) { console.log('Win Collision!', winRowCol); };
-    if(riverCol.type !== 1) { console.log('River Collision!', riverCol); };
-    if(roadCol.type !== 1) { console.log('Road Collision!', roadCol); };
+    if(winRowCol.type !== 1 || riverCol.type !== 1 || roadCol.type !== 1) {
+      if(!(winRowCol.type * riverCol.type * roadCol.type)) {
+        console.log("SPLAT!! End game");
+        game.gameOver = true;
+      }
+      else if (riverCol.type === 2) {
+        console.log('On a log');
+        game.char.setDeltaX(riverCol.deltaX);
+      }
+      else if (winRowCol.type === 3) {
+        console.log('Winner!!!!!');
+      }
+    } 
   }
 
 
@@ -72,7 +73,7 @@ game.gameLoop = function() {
       requestAnimationFrame(gameLoop);
     }
     else {
-      gameOver(elapsedTime);
+      // gameOver(elapsedTime);
     }
   }
 

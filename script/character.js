@@ -26,6 +26,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     dist: moveDist,
     ppms: moveDist / moveTime,
     timer: 0,
+    environmentDelta: 0,
   }
 
 
@@ -85,6 +86,8 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     }
   }
 
+  let setDeltaX = delta => char.move.environmentDelta = delta;
+
   // --------------------------------- Private Functions ----------------------------------
   let drawHitCircle_ = context => {
     context.strokeStyle = 'white';
@@ -105,6 +108,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   }
 
   function move_ (elapsedTime) {
+    char.pos.x += char.move.environmentDelta * elapsedTime;
     if(char.move.dir !== 0) {
       char.move.timer -= elapsedTime;
       if(char.move.timer > 0) {
@@ -153,5 +157,6 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     getCenter,
 
     setMove,
+    setDeltaX,
   });
 }

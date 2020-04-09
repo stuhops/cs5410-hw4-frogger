@@ -41,7 +41,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     updateCenter_();
     return obstacle.pos.center;
   }
-  let getDeltaX = () => obstacle.speed;
+  let getDeltaX = () => obstacle.speed * .001;
 
   let setSafe = safe => obstacle.safe = safe;
 
