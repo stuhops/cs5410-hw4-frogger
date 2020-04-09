@@ -1,17 +1,12 @@
-game.createCharacter = function(width, height, centerX, centerY, moveDist, moveTime) {
+game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   let char = {};
 
   // if(imgSrc) char = loadImage(imSrc);
 
-  char.width = width;
-  char.height = height;
+  char.radius = radius;
   char.pos = { 
-    x: centerX - char.width / 2, 
-    y: centerY - char.height / 2, 
-    center: {
-      x: centerX, 
-      y: centerY, 
-    },
+    x: centerX, 
+    y: centerY, 
     min: { 
       x: 0,
       y: 0,
@@ -40,22 +35,21 @@ game.createCharacter = function(width, height, centerX, centerY, moveDist, moveT
   }
 
   function render() { 
-    drawHitbox_(game.context);
+    drawHitCircle_(game.context);
   }
 
 
   // -------------------------------- Getters and Setters----------------------------------
-  let getHitbox = () => [
-    { x: char.pos.x, y: char.pos.y + char.height / 8}, 
-    { x: char.pos.x + char.width, y: char.pos.y + char.height / 8}, 
-    { x: char.pos.x + char.width, y: char.pos.y + char.height - char.height / 8},
-    { x: char.pos.x, y: char.pos.y + char.height - char.height / 8},
-    { x: char.pos.x, y: char.pos.y + char.height / 8}, 
-  ];
-  let getCenter = () => { 
-    updateCenter_();
-    return char.pos.center;
+  let getHitCircle = () => { 
+    return ({
+      center: {
+        x: char.x, 
+        y: char.y, 
+      },
+      radius: char.radius, 
+    })
   }
+  let getCenter = () => char.pos;
 
   let setMove = dir => {
     if(char.move.dir === 0) {
@@ -92,45 +86,22 @@ game.createCharacter = function(width, height, centerX, centerY, moveDist, moveT
   }
 
   // --------------------------------- Private Functions ----------------------------------
-  let drawHitbox_ = context => {
-    let hitbox = getHitbox();
-
+  let drawHitCircle_ = context => {
     context.strokeStyle = 'white';
     context.fillStyle = 'black';
     context.lineWidth = 6;
     context.beginPath();
-    context.moveTo(hitbox[0].x, hitbox[0].y);
 
-    for(let i = 1; i < hitbox.length; i++) {
-      context.lineTo(hitbox[i].x, hitbox[i].y);
-    }
+    context.arc(char.pos.x, char.pos.y, char.radius, 0, 2 * Math.PI);
 
     context.closePath();
     context.stroke();
     context.fill();
   }
 
-  let setPos_ = (x=char.pos.x, y=char.pos.y) => {
-    char.pos.x = x;
-    char.pos.y = y;
-    updateCenter_();
-  }
-
-  let setCenter_ = (x=char.pos.center.x, y=char.pos.center.y) => {
-    setPos_(x - char.width / 2, y - char.height / 2);
-  }
-
   let offsetPos_ = (xDif=0, yDif=0) => {
-    char.pos.x = char.pos.x + xDif;
-    char.pos.y = char.pos.y + yDif;
-    updateCenter_();
-  }
-
-  let updateCenter_ = () => {
-    char.pos.center = {
-      x: char.pos.x + char.width / 2, 
-      y: char.pos.y + char.height / 2, 
-    }; 
+    char.pos.x += xDif;
+    char.pos.y += yDif;
   }
 
   function move_ (elapsedTime) {
@@ -147,14 +118,15 @@ game.createCharacter = function(width, height, centerX, centerY, moveDist, moveT
       else {
         char.move.timer = 0;
         char.move.dir = 0;
-        setCenter_(char.pos.nextCenter.x, char.pos.nextCenter.y);
+        char.pos.x = char.pos.nextCenter.x;
+        char.pos.y = char.pos.nextCenter.y;
       }
     }
   }
 
   let setNextMoveCenter_ = (xSign=0, ySign=0) => {
-    let nextX = char.pos.center.x + xSign * char.move.dist;
-    let nextY = char.pos.center.y + ySign * char.move.dist;
+    let nextX = char.pos.x + xSign * char.move.dist;
+    let nextY = char.pos.y + ySign * char.move.dist;
 
     if(    nextX <= char.pos.max.x 
         && nextX >= char.pos.min.x
@@ -177,7 +149,7 @@ game.createCharacter = function(width, height, centerX, centerY, moveDist, moveT
 
     // Helper Functions
     // Getters and Setters
-    getHitbox,
+    getHitCircle,
     getCenter,
 
     setMove,

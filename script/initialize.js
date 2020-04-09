@@ -63,8 +63,7 @@ function newGame() {
 
 // game.createCharacter = function(width, height, centerX, centerY, moveDist, moveTime) {
   game.char = game.createCharacter(
-    game.gameHeight / game.rows,  // width
-    game.gameHeight / game.rows,  // height
+    .5 * game.gameHeight / game.rows,  // radius
     game.gameWidth / 2,  // centerX
     (game.rows - .5) * game.gameHeight / game.rows,  // centerY
     game.gameHeight / game.rows,  // moveDist
