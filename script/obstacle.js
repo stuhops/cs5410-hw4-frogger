@@ -200,6 +200,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
           // TODO: Make sure that this doesn't throw an error
           row.obstacles.splice(i, 1);
           i--;
+          break;
         }
       }
     }

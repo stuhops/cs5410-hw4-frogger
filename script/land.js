@@ -14,46 +14,19 @@ game.createLand = function(x, y, width, height, imgSrc) {
       y: y + land.height / 2,
     }
   }
-  land.rows = [];
   land.safe = true;
-  let mainOffset = 2;
-  land.offsets = {
-    speed: 80 / mainOffset,
-    width: 100,
-    freq: 1700 * mainOffset,
-    time: 1696,
-  };
-
-  // ------------------------------- Initialize From Level --------------------------------
-  land.rows.push(
-    game.createObstacleRow(
-      land.pos.x,  // x
-      land.pos.y,  // y
-      land.width,  // width
-      land.height / ROWS,  // height
-      0,  // speedInPixelsPerSecond
-      true,  // safe
-      [true],  // obstacleSafeArr
-      [0], // obstacleWidthArr
-      [0],   // freqArr
-      0 * land.offsets.time
-      // [row0car]  // obstacleImgSrcArr
-    )
-  );
 
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) { 
-    updateRows_(elapsedTime);
   }
 
   function render() { 
     drawHitbox_(game.context);
-    renderRows_();
   }
 
 
   // -------------------------------- Getters and Setters----------------------------------
-  let isCollision = () => false;
+  let getCollisionType = () => { return({ type: 1 })};
 
 
   // --------------------------------- Private Functions ----------------------------------
@@ -67,18 +40,6 @@ game.createLand = function(x, y, width, height, imgSrc) {
       x: land.pos.x + land.width / 2, 
       y: land.pos.y + land.height / 2, 
     }; 
-  }
-
-  function updateRows_(elapsedTime) {
-    for(let i = 0; i < land.rows.length; i++) {
-      land.rows[i].update(elapsedTime);
-    }
-  }
-
-  function renderRows_() {
-    for(let i = 0; i < land.rows.length; i++) {
-      land.rows[i].render();
-    }
   }
 
   function drawHitbox_ (context) {
@@ -117,6 +78,6 @@ game.createLand = function(x, y, width, height, imgSrc) {
 
     // Helper Functions
     // Getters and Setters
-    isCollision,
+    getCollisionType,
   });
 }
