@@ -1,5 +1,7 @@
 let canvas = document.getElementById('canvas-main');
 let context = canvas.getContext('2d');
+game.canvas = canvas;
+game.context = context;
 
 let inputBuffer = {};
 window.addEventListener('keydown', function(event) {
@@ -8,39 +10,6 @@ window.addEventListener('keydown', function(event) {
 window.addEventListener('keyup', function(event) {
   delete inputBuffer[event.key];
 });
-
-let game = {
-  route: 'main-menu',
-
-  // ------------- Canvas --------------
-  gameHeight: 1024,
-  gameWidth: 1024,
-  canvas: canvas,
-  context: context,
-
-  // ---------- Game State -------------
-  level: 1,
-  levels: 1,
-  gameOver: false,
-  score: 100,
-
-  // ---------- Game Vars --------------
-  rows: 14,
-  obstacles: [],
-
-  // --------- High Scores -------------
-  highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
-
-  // ----------- Controls --------------
-  up: 'ArrowUp',
-  down: 'ArrowDown',
-  left: 'ArrowLeft',
-  right: 'ArrowRight',
-
-  // ------------ Audio ----------------
-
-  // ------------ Images ---------------
-};
 
 if(JSON.parse(window.localStorage.getItem('frogger-high-scores')) !== null)
   game.highScores = JSON.parse(window.localStorage.getItem('frogger-high-scores'));

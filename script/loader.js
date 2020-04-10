@@ -1,8 +1,138 @@
 game = {
-    assets: {}
+    route: 'main-menu',
+
+    // ------------- Canvas --------------
+    gameHeight: 1024,
+    gameWidth: 1024,
+
+    // ---------- Game State -------------
+    level: 1,
+    levels: 1,
+    gameOver: false,
+    score: 100,
+
+    // ---------- Game Vars --------------
+    rows: 14,
+    obstacles: [],
+
+    // --------- High Scores -------------
+    highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
+
+    // ----------- Controls --------------
+    up: 'ArrowUp',
+    down: 'ArrowDown',
+    left: 'ArrowLeft',
+    right: 'ArrowRight',
+
+    // ------------ Audio ----------------
+
+    // ------------ Images ---------------
 };
 
-function initialize() {
+//------------------------------------------------------------------
+//
+// Purpose of this code is to bootstrap (maybe I should use that as the name)
+// the rest of the application.  Only this file is specified in the index.html
+// file, then the code in this file gets all the other code and assets
+// loaded.
+//
+//------------------------------------------------------------------
+
+            // 'navigation', 'random', 'particle-system', 'stats', 'initialize', 'settings', 
+            // 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road', 'river', 
+            // 'land', 'winRow', 'character'
+game.loader = (function() {
+    'use strict';
+    let scriptOrder = [
+        {
+            scripts: ['navigation'],
+            message: 'Navigation Loaded',
+            onComplete: null
+        }, {
+            scripts: ['random'],
+            message: 'Random number generator loaded',
+            onComplete: null
+        }, {
+            scripts: ['particle-system', 'stats'],
+            message: 'Particle system model loaded',
+            onComplete: null
+        }, {
+            scripts: ['initialize', 'settings', 'collision', 'graphics', 'gameLoop', 'images'],
+            message: 'Foundation loaded',
+            onComplete: null
+        }, {
+            scripts: ['obstacle', 'road', 'river', 'land', 'winRow', 'character'],
+            message: 'Game Board loaded',
+            onComplete: null
+        }];
+    let assetOrder = [];
+
+    //------------------------------------------------------------------
+    //
+    // Helper function used to load scripts in the order specified by the
+    // 'scripts' parameter.  'scripts' expects an array of objects with
+    // the following format...
+    //    {
+    //        scripts: [script1, script2, ...],
+    //        message: 'Console message displayed after loading is complete',
+    //        onComplete: function to call when loading is complete, may be null
+    //    }
+    //
+    //------------------------------------------------------------------
+    function loadScripts(scripts, onComplete) {
+        //
+        // When we run out of things to load, that is when we call onComplete.
+        if (scripts.length > 0) {
+            let entry = scripts[0];
+            require(entry.scripts, function() {
+                console.log(entry.message);
+                if (entry.onComplete) {
+                    entry.onComplete();
+                }
+                scripts.shift();    // Alternatively: scripts.splice(0, 1);
+                loadScripts(scripts, onComplete);
+            });
+        } else {
+            onComplete();
+        }
+    }
+
+    //------------------------------------------------------------------
+    //
+    // Helper function used to load assets in the order specified by the
+    // 'assets' parameter.  'assets' expects an array of objects with
+    // the following format...
+    //    {
+    //        key: 'asset-1',
+    //        source: 'asset/.../asset.png'
+    //    }
+    //
+    // onSuccess is invoked per asset as: onSuccess(key, asset)
+    // onError is invoked per asset as: onError(error)
+    // onComplete is invoked once per 'assets' array as: onComplete()
+    //
+    //------------------------------------------------------------------
+    function loadAssets(assets, onSuccess, onError, onComplete) {
+        //
+        // When we run out of things to load, that is when we call onComplete.
+        if (assets.length > 0) {
+            let entry = assets[0];
+            loadAsset(entry.source,
+                function(asset) {
+                    onSuccess(entry, asset);
+                    assets.shift();    // Alternatively: assets.splice(0, 1);
+                    loadAssets(assets, onSuccess, onError, onComplete);
+                },
+                function(error) {
+                    onError(error);
+                    assets.shift();    // Alternatively: assets.splice(0, 1);
+                    loadAssets(assets, onSuccess, onError, onComplete);
+                });
+        } else {
+            onComplete();
+        }
+    }
+
     //------------------------------------------------------------------
     //
     // This function is used to asynchronously load image and audio assets.
@@ -44,69 +174,30 @@ function initialize() {
         xhr.send();
     }
 
+    //------------------------------------------------------------------
     //
-    // Load the random.js code file
-
-    require(
-        ['navigation', 'random'],
-        function() {        // on success
-            console.log('random.js loaded');
-            console.log('navigation.js loaded');
-            console.log('random number test: ', Random.nextDouble());
-        },
-        function(error) {   // on failure
-            console.log('error: ', error);
-        }
-    );
-    require(
-        ['particle-system', 'stats'],
-        function() {        // on success
-            console.log('particle-system.js loaded');
-            console.log('stats.js loaded');
-        },
-        function(error) {   // on failure
-            console.log('error: ', error);
-        }
-    );
-    require(
-        ['initialize'],
-        function() {        // on success
-            console.log('initialize.js loaded');
-        },
-        function(error) {   // on failure
-            console.log('error: ', error);
-        }
-    );
-    require(
-        ['settings', 'collision', 'graphics', 'gameLoop', 'images', 'obstacle', 'road', 'river', 'land', 'winRow', 'character'],
-        function() {  // on success
-            console.log('settings.js loaded');
-            console.log('collision.js loaded');
-            console.log('graphics.js loaded');
-            console.log('gameLoop.js loaded');
-            console.log('images.js loaded');
-            console.log('obstacle.js loaded');
-            console.log('road.js loaded');
-            console.log('river.js loaded');
-            console.log('land.js loaded');
-            console.log('winRow.js loaded');
-        },
-        function(error) {  // on failure
-            console.log('error: ', error);
-        }
-    );
+    // Called when all the scripts are loaded, it kicks off the demo app.
+    //
+    //------------------------------------------------------------------
+    function mainComplete() {
+        console.log('It is all loaded up');
+    }
 
     //
-    // Load the fire.png asset
-    loadAsset(
-        '../assets/fire.png',
-        function(asset) {
-            console.log('fire.png loaded');
-            console.log('asset: ', asset);
-            game.assets['fire'] = asset;
+    // Start with loading the assets, then the scripts.
+    console.log('Starting to dynamically load project assets');
+    loadAssets(assetOrder,
+        function(source, asset) {    // Store it on success
+            game.assets[source.key] = asset;
         },
         function(error) {
-            console.log('error: ', error);
+            console.log(error);
+        },
+        function() {
+            console.log('All game assets loaded');
+            console.log('Starting to dynamically load project scripts');
+            loadScripts(scriptOrder, mainComplete);
         }
     );
-};
+
+}());
