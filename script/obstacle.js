@@ -232,16 +232,42 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     row.frequency.timer -= elapsedTime;
     if(row.frequency.timer < 0) {
       // Generate new obstacle
-      let newObstacle = game.createObstacle(
-        row.obstacleWidth.arr[row.obstacleWidth.iterator],  // width
-        row.height,  // height
-        row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] : row.width,  // x
-        row.pos.y,  // y
-        row.speed,  // speedInPixelsPerSecond
-        row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
-        // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
-      );
-      row.obstacles.push(newObstacle);
+      if(row.obstacleSafe.arr[row.obstacleSafe.iterator][0].alligator) {
+        let newObstacle = game.createObstacle(
+          row.obstacleWidth.arr[row.obstacleWidth.iterator],  // width
+          row.height,  // height
+          row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] : row.width,  // x
+          row.pos.y,  // y
+          row.speed,  // speedInPixelsPerSecond
+          row.obstacleSafe.arr[row.obstacleSafe.iterator][0].bodySafe,  // safe
+          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+        );
+        let newHead = game.createObstacle(
+          row.obstacleWidth.arr[row.obstacleWidth.iterator] / 4,  // width
+          row.height,  // height
+          row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] / 4 : row.width,  // x
+          row.pos.y,  // y
+          row.speed,  // speedInPixelsPerSecond
+          row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
+          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+        );
+        
+        row.obstacles.push(newObstacle);
+        row.obstacles.push(newHead);
+      }
+      else {
+        let newObstacle = game.createObstacle(
+          row.obstacleWidth.arr[row.obstacleWidth.iterator],  // width
+          row.height,  // height
+          row.posDir ? row.pos.x - row.obstacleWidth.arr[row.obstacleWidth.iterator] : row.width,  // x
+          row.pos.y,  // y
+          row.speed,  // speedInPixelsPerSecond
+          row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
+          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+        );
+        row.obstacles.push(newObstacle);
+      }
+
 
       // Restart timer
       row.obstacleSafe.iterator = (row.obstacleSafe.iterator + 1) % row.obstacleSafe.arr.length;

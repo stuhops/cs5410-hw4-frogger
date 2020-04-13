@@ -137,6 +137,123 @@ game.createRiver = function(x, y, width, height, imgSrc) {
       )
     );
   } 
+
+  else if(game.level === 2) {
+    let turtleOscillateSafeArr = [
+      {bool: true, img: null, duration: 1000},  // Emerging
+      {bool: true, img: null, duration: 1000},  // Floating
+      {bool: true, img: null, duration: 1000},  // Submerging
+      {bool: false, img: null, duration: 1000},  // Submerged
+    ];
+    let alligatorOscillateSafeArr = [
+      {bool: true, img: null, duration: 1000, alligator: true, bodySafe: [{bool: true, img:null, duration: 10000}] },  // Mouth closed
+      {bool: false, img: null, duration: 1000},  // Mouth Open
+    ];
+    let staticSafeArr= [{bool: true, img: null, duration: 10000}];
+
+    // Row 0
+    river.rows.push(
+      game.createObstacleRow(
+        river.pos.x,  // x
+        river.pos.y + 0 * (river.height / ROWS),  // y
+        river.width,  // width
+        river.height / ROWS,  // height
+        2 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [alligatorOscillateSafeArr],  // obstacleSafeArr
+        [3.7 * river.offsets.width], // obstacleWidthArr
+        [1.5 * river.offsets.freq],   // freqArr
+        0 * river.offsets.time
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
+  // safeStateArr = [ {safe, img, duration} ]
+
+    // // Row 1
+    // river.rows.push(
+    //   game.createObstacleRow(
+    //     river.pos.x,  // x
+    //     river.pos.y + 1 * (river.height / ROWS),  // y
+    //     river.width,  // width
+    //     river.height / ROWS,  // height
+    //     -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
+    //     false,  // safe
+    //     [ 
+    //       turtleOscillateSafeArr, turtleOscillateSafeArr,
+    //       staticSafeArr, staticSafeArr,
+    //       staticSafeArr, staticSafeArr,
+    //       staticSafeArr, staticSafeArr,
+    //       staticSafeArr, staticSafeArr,
+    //     ],  // obstacleSafeArr
+    //     [.5 * river.offsets.width], // obstacleWidthArr
+    //     [
+    //       1.5 * river.offsets.freq, .3 * river.offsets.freq,
+    //       1 * river.offsets.freq, .3 * river.offsets.freq,
+    //       1 * river.offsets.freq, .3 * river.offsets.freq,
+    //       1 * river.offsets.freq, .3 * river.offsets.freq,
+    //       1 * river.offsets.freq, .3 * river.offsets.freq,
+    //     ],   // freqArr
+    //     1 * river.offsets.time
+    //     // [row0car]  // obstacleImgSrcArr
+    //   )
+    // );
+
+    // // Row 2
+    // river.rows.push(
+    //   game.createObstacleRow(
+    //     river.pos.x,  // x
+    //     river.pos.y + 2 * (river.height / ROWS),  // y
+    //     river.width,  // width
+    //     river.height / ROWS,  // height
+    //     4 * river.offsets.speed,  // speedInPixelsPerSecond
+    //     false,  // safe
+    //     [staticSafeArr],  // obstacleSafeArr
+    //     [4 * river.offsets.width], // obstacleWidthArr
+    //     [1.5 * river.offsets.freq],   // freqArr
+    //     2 * river.offsets.time
+    //     // [row0car]  // obstacleImgSrcArr
+    //   )
+    // );
+
+    // // Row 3
+    // river.rows.push(
+    //   game.createObstacleRow(
+    //     river.pos.x,  // x
+    //     river.pos.y + 3 * (river.height / ROWS),  // y
+    //     river.width,  // width
+    //     river.height / ROWS,  // height
+    //     1.5 * river.offsets.speed,  // speedInPixelsPerSecond
+    //     false,  // safe
+    //     [staticSafeArr],  // obstacleSafeArr
+    //     [2 * river.offsets.width], // obstacleWidthArr
+    //     [2 * river.offsets.freq, 1.75 * river.offsets.freq, 1.75 * river.offsets.freq],   // freqArr
+    //     3 * river.offsets.time
+    //     // [row0car]  // obstacleImgSrcArr
+    //   )
+    // );
+
+    // // Row 4
+    // river.rows.push(
+    //   game.createObstacleRow(
+    //     river.pos.x,  // x
+    //     river.pos.y + 4 * (river.height / ROWS),  // y
+    //     river.width,  // width
+    //     river.height / ROWS,  // height
+    //     -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
+    //     false,  // safe
+    //     [ 
+    //       turtleOscillateSafeArr, turtleOscillateSafeArr, turtleOscillateSafeArr,
+    //       staticSafeArr, staticSafeArr, staticSafeArr,
+    //       staticSafeArr, staticSafeArr, staticSafeArr,
+    //       staticSafeArr, staticSafeArr, staticSafeArr,
+    //     ],  // obstacleSafeArr
+    //     [.5 * river.offsets.width], // obstacleWidthArr
+    //     [1 * river.offsets.freq, .3 * river.offsets.freq, .3 * river.offsets.freq],   // freqArr
+    //     4 * river.offsets.time
+    //     // [row0car]  // obstacleImgSrcArr
+    //   )
+    // );
+  } 
   else { console.log(`Level ${game.level} is not created.`)}
 
 
