@@ -112,6 +112,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
       )
     );
   } 
+
   else if(game.level === 2) {
     let staticSafeArr= [{bool: false, img: null, duration: 10000}];
     // Row 0
@@ -121,11 +122,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 0 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        -2 * road.offsets.speed,  // speedInPixelsPerSecond
+        -3 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [2 * road.offsets.width], // obstacleWidthArr
-        [2 * road.offsets.freq, 5 * road.offsets.freq],   // freqArr
+        [1.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
         0 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -138,11 +139,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 1 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        1.75 * road.offsets.speed,  // speedInPixelsPerSecond
+        8 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [1 * road.offsets.width], // obstacleWidthArr
-        [6 * road.offsets.freq],   // freqArr
+        [2 * road.offsets.freq, .1 * road.offsets.freq],   // freqArr
         1 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -155,11 +156,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 2 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        -1.6 * road.offsets.speed,  // speedInPixelsPerSecond
+        -4 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [4 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [.75 * road.offsets.freq, .75 * road.offsets.freq, .5 * road.offsets.freq],   // freqArr
         2 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -172,11 +173,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 3 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        1.6 * road.offsets.speed,  // speedInPixelsPerSecond
+        3 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [3.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [1 * road.offsets.freq],   // freqArr
         3 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
@@ -189,11 +190,11 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.pos.y + 4 * (road.height / ROWS),  // y
         road.width,  // width
         road.height / ROWS,  // height
-        -1.7 * road.offsets.speed,  // speedInPixelsPerSecond
+        -3.5 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
-        [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [.3 * road.offsets.freq, .75 * road.offsets.freq, .75 * road.offsets.freq],   // freqArr
         4 * road.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
