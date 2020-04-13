@@ -158,7 +158,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 0 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        2 * river.offsets.speed,  // speedInPixelsPerSecond
+        3 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [alligatorOscillateSafeArr, staticSafeArr, staticSafeArr, staticSafeArr, staticSafeArr],  // obstacleSafeArr
         [3.7 * river.offsets.width], // obstacleWidthArr
