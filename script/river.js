@@ -160,7 +160,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.height / ROWS,  // height
         2 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
-        [alligatorOscillateSafeArr],  // obstacleSafeArr
+        [alligatorOscillateSafeArr, staticSafeArr, staticSafeArr, staticSafeArr, staticSafeArr],  // obstacleSafeArr
         [3.7 * river.offsets.width], // obstacleWidthArr
         [1.5 * river.offsets.freq],   // freqArr
         0 * river.offsets.time
@@ -169,90 +169,90 @@ game.createRiver = function(x, y, width, height, imgSrc) {
     );
   // safeStateArr = [ {safe, img, duration} ]
 
-    // // Row 1
-    // river.rows.push(
-    //   game.createObstacleRow(
-    //     river.pos.x,  // x
-    //     river.pos.y + 1 * (river.height / ROWS),  // y
-    //     river.width,  // width
-    //     river.height / ROWS,  // height
-    //     -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
-    //     false,  // safe
-    //     [ 
-    //       turtleOscillateSafeArr, turtleOscillateSafeArr,
-    //       staticSafeArr, staticSafeArr,
-    //       staticSafeArr, staticSafeArr,
-    //       staticSafeArr, staticSafeArr,
-    //       staticSafeArr, staticSafeArr,
-    //     ],  // obstacleSafeArr
-    //     [.5 * river.offsets.width], // obstacleWidthArr
-    //     [
-    //       1.5 * river.offsets.freq, .3 * river.offsets.freq,
-    //       1 * river.offsets.freq, .3 * river.offsets.freq,
-    //       1 * river.offsets.freq, .3 * river.offsets.freq,
-    //       1 * river.offsets.freq, .3 * river.offsets.freq,
-    //       1 * river.offsets.freq, .3 * river.offsets.freq,
-    //     ],   // freqArr
-    //     1 * river.offsets.time
-    //     // [row0car]  // obstacleImgSrcArr
-    //   )
-    // );
+    // Row 1
+    river.rows.push(
+      game.createObstacleRow(
+        river.pos.x,  // x
+        river.pos.y + 1 * (river.height / ROWS),  // y
+        river.width,  // width
+        river.height / ROWS,  // height
+        -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [ 
+          turtleOscillateSafeArr, turtleOscillateSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+        ],  // obstacleSafeArr
+        [.5 * river.offsets.width], // obstacleWidthArr
+        [
+          1.5 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1 * river.offsets.freq, .3 * river.offsets.freq,
+        ],   // freqArr
+        1 * river.offsets.time
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 2
-    // river.rows.push(
-    //   game.createObstacleRow(
-    //     river.pos.x,  // x
-    //     river.pos.y + 2 * (river.height / ROWS),  // y
-    //     river.width,  // width
-    //     river.height / ROWS,  // height
-    //     4 * river.offsets.speed,  // speedInPixelsPerSecond
-    //     false,  // safe
-    //     [staticSafeArr],  // obstacleSafeArr
-    //     [4 * river.offsets.width], // obstacleWidthArr
-    //     [1.5 * river.offsets.freq],   // freqArr
-    //     2 * river.offsets.time
-    //     // [row0car]  // obstacleImgSrcArr
-    //   )
-    // );
+    // Row 2
+    river.rows.push(
+      game.createObstacleRow(
+        river.pos.x,  // x
+        river.pos.y + 2 * (river.height / ROWS),  // y
+        river.width,  // width
+        river.height / ROWS,  // height
+        4 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [staticSafeArr],  // obstacleSafeArr
+        [4 * river.offsets.width], // obstacleWidthArr
+        [1.5 * river.offsets.freq],   // freqArr
+        2 * river.offsets.time
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 3
-    // river.rows.push(
-    //   game.createObstacleRow(
-    //     river.pos.x,  // x
-    //     river.pos.y + 3 * (river.height / ROWS),  // y
-    //     river.width,  // width
-    //     river.height / ROWS,  // height
-    //     1.5 * river.offsets.speed,  // speedInPixelsPerSecond
-    //     false,  // safe
-    //     [staticSafeArr],  // obstacleSafeArr
-    //     [2 * river.offsets.width], // obstacleWidthArr
-    //     [2 * river.offsets.freq, 1.75 * river.offsets.freq, 1.75 * river.offsets.freq],   // freqArr
-    //     3 * river.offsets.time
-    //     // [row0car]  // obstacleImgSrcArr
-    //   )
-    // );
+    // Row 3
+    river.rows.push(
+      game.createObstacleRow(
+        river.pos.x,  // x
+        river.pos.y + 3 * (river.height / ROWS),  // y
+        river.width,  // width
+        river.height / ROWS,  // height
+        1.5 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [staticSafeArr],  // obstacleSafeArr
+        [2 * river.offsets.width], // obstacleWidthArr
+        [2 * river.offsets.freq, 1.75 * river.offsets.freq, 1.75 * river.offsets.freq],   // freqArr
+        3 * river.offsets.time
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
 
-    // // Row 4
-    // river.rows.push(
-    //   game.createObstacleRow(
-    //     river.pos.x,  // x
-    //     river.pos.y + 4 * (river.height / ROWS),  // y
-    //     river.width,  // width
-    //     river.height / ROWS,  // height
-    //     -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
-    //     false,  // safe
-    //     [ 
-    //       turtleOscillateSafeArr, turtleOscillateSafeArr, turtleOscillateSafeArr,
-    //       staticSafeArr, staticSafeArr, staticSafeArr,
-    //       staticSafeArr, staticSafeArr, staticSafeArr,
-    //       staticSafeArr, staticSafeArr, staticSafeArr,
-    //     ],  // obstacleSafeArr
-    //     [.5 * river.offsets.width], // obstacleWidthArr
-    //     [1 * river.offsets.freq, .3 * river.offsets.freq, .3 * river.offsets.freq],   // freqArr
-    //     4 * river.offsets.time
-    //     // [row0car]  // obstacleImgSrcArr
-    //   )
-    // );
+    // Row 4
+    river.rows.push(
+      game.createObstacleRow(
+        river.pos.x,  // x
+        river.pos.y + 4 * (river.height / ROWS),  // y
+        river.width,  // width
+        river.height / ROWS,  // height
+        -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
+        false,  // safe
+        [ 
+          turtleOscillateSafeArr, turtleOscillateSafeArr, turtleOscillateSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
+        ],  // obstacleSafeArr
+        [.5 * river.offsets.width], // obstacleWidthArr
+        [1 * river.offsets.freq, .3 * river.offsets.freq, .3 * river.offsets.freq],   // freqArr
+        4 * river.offsets.time
+        // [row0car]  // obstacleImgSrcArr
+      )
+    );
   } 
   else { console.log(`Level ${game.level} is not created.`)}
 
