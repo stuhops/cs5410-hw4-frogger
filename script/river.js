@@ -146,8 +146,8 @@ game.createRiver = function(x, y, width, height, imgSrc) {
       {bool: false, img: null, duration: 1000},  // Submerged
     ];
     let alligatorOscillateSafeArr = [
-      {bool: true, img: null, duration: 1000, alligator: true, bodySafe: [{bool: true, img:null, duration: 10000}] },  // Mouth closed
-      {bool: false, img: null, duration: 1000},  // Mouth Open
+      {bool: true, img: null, duration: 2000, alligator: true, bodySafe: [{bool: true, img:null, duration: 10000}] },  // Mouth closed
+      {bool: false, img: null, duration: 2000},  // Mouth Open
     ];
     let staticSafeArr= [{bool: true, img: null, duration: 10000}];
 
@@ -167,7 +167,6 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         // [row0car]  // obstacleImgSrcArr
       )
     );
-  // safeStateArr = [ {safe, img, duration} ]
 
     // Row 1
     river.rows.push(
@@ -176,7 +175,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 1 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
+        -2.5 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [ 
           turtleOscillateSafeArr, turtleOscillateSafeArr,
@@ -187,11 +186,11 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         ],  // obstacleSafeArr
         [.5 * river.offsets.width], // obstacleWidthArr
         [
-          1.5 * river.offsets.freq, .3 * river.offsets.freq,
-          1 * river.offsets.freq, .3 * river.offsets.freq,
-          1 * river.offsets.freq, .3 * river.offsets.freq,
-          1 * river.offsets.freq, .3 * river.offsets.freq,
-          1 * river.offsets.freq, .3 * river.offsets.freq,
+          1.25 * river.offsets.freq, .2 * river.offsets.freq,
+          .75 * river.offsets.freq, .2 * river.offsets.freq,
+          .75 * river.offsets.freq, .2 * river.offsets.freq,
+          .75 * river.offsets.freq, .2 * river.offsets.freq,
+          .75 * river.offsets.freq, .2 * river.offsets.freq,
         ],   // freqArr
         1 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
@@ -205,7 +204,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 2 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        4 * river.offsets.speed,  // speedInPixelsPerSecond
+        4.5 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [4 * river.offsets.width], // obstacleWidthArr
@@ -222,7 +221,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 3 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        1.5 * river.offsets.speed,  // speedInPixelsPerSecond
+        2 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [staticSafeArr],  // obstacleSafeArr
         [2 * river.offsets.width], // obstacleWidthArr
@@ -239,7 +238,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.pos.y + 4 * (river.height / ROWS),  // y
         river.width,  // width
         river.height / ROWS,  // height
-        -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
+        -5.6 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [ 
           turtleOscillateSafeArr, turtleOscillateSafeArr, turtleOscillateSafeArr,
@@ -248,7 +247,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
           staticSafeArr, staticSafeArr, staticSafeArr,
         ],  // obstacleSafeArr
         [.5 * river.offsets.width], // obstacleWidthArr
-        [1 * river.offsets.freq, .3 * river.offsets.freq, .3 * river.offsets.freq],   // freqArr
+        [.5 * river.offsets.freq, .1 * river.offsets.freq, .1 * river.offsets.freq],   // freqArr
         4 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
