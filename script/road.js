@@ -26,6 +26,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
 
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
+    let staticSafeArr= [{bool: false, img: null, duration: 10000}];
     // Row 0
     road.rows.push(
       game.createObstacleRow(
@@ -35,7 +36,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.height / ROWS,  // height
         -2 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
-        [false],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [2 * road.offsets.width], // obstacleWidthArr
         [2 * road.offsets.freq, 5 * road.offsets.freq],   // freqArr
         0 * road.offsets.time
@@ -52,7 +53,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.height / ROWS,  // height
         1.75 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
-        [false],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [1 * road.offsets.width], // obstacleWidthArr
         [6 * road.offsets.freq],   // freqArr
         1 * road.offsets.time
@@ -69,7 +70,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.height / ROWS,  // height
         -1.6 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
-        [false],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
         [4 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
         2 * road.offsets.time
@@ -86,7 +87,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.height / ROWS,  // height
         1.6 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
-        [false],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
         [3.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
         3 * road.offsets.time
@@ -103,7 +104,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         road.height / ROWS,  // height
         -1.7 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
-        [false],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [.75 * road.offsets.width], // obstacleWidthArr
         [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
         4 * road.offsets.time

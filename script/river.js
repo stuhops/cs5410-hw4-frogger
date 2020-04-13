@@ -26,6 +26,14 @@ game.createRiver = function(x, y, width, height, imgSrc) {
 
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
+    let turtleOscillateSafeArr = [
+      {bool: true, img: null, duration: 1250},  // Emerging
+      {bool: true, img: null, duration: 1250},  // Floating
+      {bool: true, img: null, duration: 1250},  // Submerging
+      {bool: false, img: null, duration: 1250},  // Submerged
+    ];
+    let staticSafeArr= [{bool: true, img: null, duration: 10000}];
+
     // Row 0
     river.rows.push(
       game.createObstacleRow(
@@ -35,13 +43,14 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.height / ROWS,  // height
         2 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
-        [true],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [3.7 * river.offsets.width], // obstacleWidthArr
         [2 * river.offsets.freq],   // freqArr
         0 * river.offsets.time
         // [row0car]  // obstacleImgSrcArr
       )
     );
+  // safeStateArr = [ {safe, img, duration} ]
 
     // Row 1
     river.rows.push(
@@ -52,7 +61,13 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.height / ROWS,  // height
         -1.75 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
-        [false, false, true, true, true, true, true, true, true, true,],  // obstacleSafeArr
+        [ 
+          turtleOscillateSafeArr, turtleOscillateSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr,
+        ],  // obstacleSafeArr
         [.5 * river.offsets.width], // obstacleWidthArr
         [
           1.5 * river.offsets.freq, .3 * river.offsets.freq,
@@ -75,7 +90,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.height / ROWS,  // height
         4 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
-        [true],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [4 * river.offsets.width], // obstacleWidthArr
         [1.5 * river.offsets.freq],   // freqArr
         2 * river.offsets.time
@@ -92,7 +107,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         river.height / ROWS,  // height
         1.5 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
-        [true],  // obstacleSafeArr
+        [staticSafeArr],  // obstacleSafeArr
         [2 * river.offsets.width], // obstacleWidthArr
         [2 * river.offsets.freq, 1.75 * river.offsets.freq, 1.75 * river.offsets.freq],   // freqArr
         3 * river.offsets.time
@@ -110,10 +125,10 @@ game.createRiver = function(x, y, width, height, imgSrc) {
         -1.6 * river.offsets.speed,  // speedInPixelsPerSecond
         false,  // safe
         [ 
-          false, false, false,
-          true, true, true,
-          true, true, true,
-          true, true, true,
+          turtleOscillateSafeArr, turtleOscillateSafeArr, turtleOscillateSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
+          staticSafeArr, staticSafeArr, staticSafeArr,
         ],  // obstacleSafeArr
         [.5 * river.offsets.width], // obstacleWidthArr
         [1 * river.offsets.freq, .3 * river.offsets.freq, .3 * river.offsets.freq],   // freqArr

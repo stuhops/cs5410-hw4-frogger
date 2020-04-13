@@ -101,6 +101,7 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
   }
 
   function generateNewObstacles_() {
+    let staticSafeArr= [{bool: true, img: null, duration: 10000}];
     for(let i = 0; i < 5; i++) {
       // Generate new obstacle
       let newObstacle = game.createObstacle(
@@ -109,7 +110,7 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
         row.slot.spacingOffset + row.slot.spacing * i,  // x
         row.pos.y + height - row.slot.height,  // y
         0,  // speedInPixelsPerSecond
-        true,  // safe
+        staticSafeArr,  // safe
         // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
       );
       row.obstacles.push(newObstacle);

@@ -1,5 +1,5 @@
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Obstacle >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe, imgSrc) {
+game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safeArr, imgSrc) {
   let obstacle = {};
 
   // if(imgSrc) obstacle = loadImage(imSrc);
@@ -15,12 +15,22 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     }
   };
   obstacle.speed = speedInPixelsPerSecond;
-  obstacle.safe = safe;
+  obstacle.safe = safeArr[0].bool;
+  if(!safeArr[0]) {
+    console.log('ERROR');
+  }
+  obstacle.safe = {
+    arr: safeArr,
+    bool: safeArr[0].bool,
+    iter: 0,
+    timer: safeArr[0].duration,
+  };
 
 
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) { 
     offsetPos_(obstacle.speed * elapsedTime * .001);
+    updateState_(elapsedTime);
   }
 
   function render() { 
@@ -29,7 +39,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
 
   // -------------------------------- Getters and Setters----------------------------------
-  let isSafe = () => obstacle.safe;
+  let isSafe = () => obstacle.safe.bool;
   let getHitbox = () => [
     { x: obstacle.pos.x, y: obstacle.pos.y + obstacle.height / 8}, 
     { x: obstacle.pos.x + obstacle.width, y: obstacle.pos.y + obstacle.height / 8}, 
@@ -43,15 +53,15 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   }
   let getDeltaX = () => obstacle.speed * .001;
 
-  let setSafe = safe => obstacle.safe = safe;
+  let setSafe = safe => obstacle.safe.bool = safe;
 
 
   // --------------------------------- Private Functions ----------------------------------
   let drawHitbox_ = context => {
     let hitbox = getHitbox();
 
-    context.strokeStyle = obstacle.safe ? 'black' : 'white';
-    context.fillStyle = obstacle.safe ? 'green' : 'red';
+    context.strokeStyle = obstacle.safe.bool ? 'black' : 'white';
+    context.fillStyle = obstacle.safe.bool ? 'green' : 'red';
     context.lineWidth = 6;
     context.beginPath();
     context.moveTo(hitbox[0].x, hitbox[0].y);
@@ -82,6 +92,16 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     }; 
   }
 
+  function updateState_(elapsedTime) {
+    obstacle.safe.timer -= elapsedTime;
+    if(obstacle.safe.timer < 0) {
+      obstacle.safe.iter = (obstacle.safe.iter + 1) % obstacle.safe.arr.length;
+
+      obstacle.safe.bool = obstacle.safe.arr[obstacle.safe.iter].bool;
+      // obstacle.img = obstacle.safe.arr[obstacle.safe.iter].img
+      obstacle.safe.timer += obstacle.safe.arr[obstacle.safe.iter].duration;
+    }
+  }
 
   // -------------------------------------- Return ----------------------------------------
   return ({
@@ -189,6 +209,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     }; 
   }
 
+  // safeStateArr = [ {safe, img, duration} ]
   function updateObstacles_(elapsedTime) {
     for(let i = 0; i < row.obstacles.length; i++) {
       row.obstacles[i].update(elapsedTime);
@@ -206,6 +227,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     }
   }
 
+  // safeStateArr = [ {safe, img, duration} ]
   function generateNewObstacles_(elapsedTime) {
     row.frequency.timer -= elapsedTime;
     if(row.frequency.timer < 0) {
