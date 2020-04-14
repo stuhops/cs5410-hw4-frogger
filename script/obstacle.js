@@ -1,8 +1,6 @@
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Obstacle >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safeArr, imgSrc) {
+game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safeArr, imgName=null) {
   let obstacle = {};
-
-  // if(imgSrc) obstacle = loadImage(imSrc);
 
   obstacle.width = width;
   obstacle.height = height;
@@ -15,6 +13,10 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     }
   };
   obstacle.speed = speedInPixelsPerSecond;
+  obstacle.img = {
+    name: imgName,
+    // length: game.renderSprite(imgName),
+  }
   obstacle.safe = safeArr[0].bool;
   if(!safeArr[0]) {
     console.log('ERROR');
@@ -35,6 +37,13 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
   function render() { 
     drawHitbox_(game.context);
+    game.renderSprite(
+      obstacle.img.name, 
+      obstacle.pos.center, 
+      {width: obstacle.width, height: obstacle.height}, 
+      Math.PI, 
+      0
+    );
   }
 
 
@@ -57,6 +66,10 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
 
   // --------------------------------- Private Functions ----------------------------------
+  function renderImg_(context) {
+    renderImage(obstacle.img, context)
+  }
+
   let drawHitbox_ = context => {
     let hitbox = getHitbox();
 
@@ -89,7 +102,10 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     obstacle.pos.center = {
       x: obstacle.pos.x + obstacle.width / 2, 
       y: obstacle.pos.y + obstacle.height / 2, 
-    }; 
+    };
+
+    if(obstacle.img) 
+      obstacle.img.center = obstacle.pos.center;
   }
 
   function updateState_(elapsedTime) {
@@ -123,7 +139,20 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Obstacle Row >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, safe, obstacleSafeArr, obstacleWidthArr, freqArr, timeOffset=0, fillImgSrc, obstacleImgSrcArr) {
+game.createObstacleRow = function(
+  x, 
+  y, 
+  width, 
+  height, 
+  speedInPixelsPerSecond, 
+  safe, 
+  obstacleSafeArr, 
+  obstacleWidthArr, 
+  freqArr, 
+  timeOffset=0, 
+  obstacleImgArr=[null]
+){
+
   let row = {};
   // if(imgSrc) row = loadImage(fillImgSrc);
 
@@ -148,10 +177,10 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
     arr: obstacleWidthArr,
     iterator: 0,
   }
-  // row.obstacleImgSrc = {
-  //   arr: obstacleImgSrcArr,
-  //   iterator: 0,
-  // };
+  row.obstacleImg = {
+    arr: obstacleImgArr,
+    iterator: 0,
+  };
   row.frequency = {
     arr: freqArr,
     iterator: 0,
@@ -240,7 +269,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
           row.pos.y,  // y
           row.speed,  // speedInPixelsPerSecond
           row.obstacleSafe.arr[row.obstacleSafe.iterator][0].bodySafe,  // safe
-          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+          row.obstacleImg.arr[row.obstacleImg.iterator]  // imgSrc
         );
         let newHead = game.createObstacle(
           row.obstacleWidth.arr[row.obstacleWidth.iterator] / 4,  // width
@@ -249,7 +278,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
           row.pos.y,  // y
           row.speed,  // speedInPixelsPerSecond
           row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
-          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+          null  // imgSrc
         );
         
         row.obstacles.push(newObstacle);
@@ -263,7 +292,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
           row.pos.y,  // y
           row.speed,  // speedInPixelsPerSecond
           row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
-          // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+          row.obstacleImg.arr[row.obstacleImg.iterator]  // imgSrc
         );
         row.obstacles.push(newObstacle);
       }
@@ -272,7 +301,7 @@ game.createObstacleRow = function(x, y, width, height, speedInPixelsPerSecond, s
       // Restart timer
       row.obstacleSafe.iterator = (row.obstacleSafe.iterator + 1) % row.obstacleSafe.arr.length;
       row.obstacleWidth.iterator = (row.obstacleWidth.iterator + 1) % row.obstacleWidth.arr.length;
-      // row.obstacleImgSrc.iterator = (row.obstacleImgSrc.iterator + 1) % row.obstacleImgSrc.arr.length;
+      row.obstacleImg.iterator = (row.obstacleImg.iterator + 1) % row.obstacleImg.arr.length;
       row.frequency.iterator = (row.frequency.iterator + 1) % row.frequency.arr.length;
 
       row.frequency.timer += row.frequency.arr[row.frequency.iterator];
