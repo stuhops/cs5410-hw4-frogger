@@ -72,7 +72,12 @@ game.createWinRow = function(x, y, width, height) {
     return({ type: 1, deltaX: 0 })
   }
 
-  let setIdxDone = idx => row.obstacles[idx].setSafe(false);
+  let setIdxDone = idx => {
+    row.obstacles[idx].setSafe(false)
+    row.obstacles[idx].setImg('winRowDone')
+  };
+
+
   // --------------------------------- Private Functions ----------------------------------
   let updateCenter_ = () => {
     obstacle.pos.center = {

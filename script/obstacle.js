@@ -69,6 +69,11 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
   let setSafe = safe => obstacle.safe.bool = safe;
 
+  let setImg = newImg => {
+    obstacle.img.name = newImg;
+    obstacle.img.num = game.renderSprite(newImg);
+  }
+
 
   // --------------------------------- Private Functions ----------------------------------
   function renderImg_(context) {
@@ -168,6 +173,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     getDeltaX,
 
     setSafe,
+    setImg,
   });
 }
 

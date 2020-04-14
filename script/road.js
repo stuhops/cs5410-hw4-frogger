@@ -1,9 +1,8 @@
-game.createRoad = function(x, y, width, height, imgSrc) {
+game.createRoad = function(x, y, width, height) {
   // ----------------------------------- Initialize ---------------------------------------
   const ROWS = 5;
   let road = {};
 
-  // if(imgSrc) road = loadImage(imSrc);
   road.width = width;
   road.height = height;
   road.pos = {
