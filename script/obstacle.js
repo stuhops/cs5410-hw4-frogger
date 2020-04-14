@@ -41,7 +41,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   }
 
   function render() { 
-    // drawHitbox_(game.context);
+    drawHitbox_(game.context);
     game.renderSprite(
       obstacle.img.name, 
       obstacle.pos.center, 
@@ -138,7 +138,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
       }
       else if(obstacle.safe.iter === 1) {
         obstacle.img.name = 'turtleSinking';
-        obstacle.img.num = 4 - parseInt(
+        obstacle.img.num = 2 - parseInt(
           4 * (obstacle.safe.timer / obstacle.safe.arr[obstacle.safe.iter].duration)
         );
       }
@@ -147,7 +147,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
       }
       else if(obstacle.safe.iter === 3) {
         obstacle.img.name = 'turtleEmerging';
-        obstacle.img.num = 4 - parseInt(
+        obstacle.img.num = 3 - parseInt(
           4 * (obstacle.safe.timer / obstacle.safe.arr[obstacle.safe.iter].duration)
         );
       }
