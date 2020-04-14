@@ -130,6 +130,28 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
       obstacle.img.timer += obstacle.img.baseTimer;
     }
+
+    let re = /turtle.*/;
+    if(re.test(obstacle.img.name)) {
+      if(obstacle.safe.iter === 0) {
+        obstacle.img.name = 'turtle';
+      }
+      else if(obstacle.safe.iter === 1) {
+        obstacle.img.name = 'turtleSinking';
+        obstacle.img.num = 4 - parseInt(
+          4 * (obstacle.safe.timer / obstacle.safe.arr[obstacle.safe.iter].duration)
+        );
+      }
+      else if(obstacle.safe.iter === 2) {
+        obstacle.img.name = 'turtleSunk';
+      }
+      else if(obstacle.safe.iter === 3) {
+        obstacle.img.name = 'turtleEmerging';
+        obstacle.img.num = 4 - parseInt(
+          4 * (obstacle.safe.timer / obstacle.safe.arr[obstacle.safe.iter].duration)
+        );
+      }
+    }
   }
 
   // -------------------------------------- Return ----------------------------------------

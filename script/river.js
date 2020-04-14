@@ -27,10 +27,10 @@ game.createRiver = function(x, y, width, height, imgSrc) {
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
     let turtleOscillateSafeArr = [
-      {bool: true, img: null, duration: 1250},  // Emerging
       {bool: true, img: null, duration: 1250},  // Floating
       {bool: true, img: null, duration: 1250},  // Submerging
       {bool: false, img: null, duration: 1250},  // Submerged
+      {bool: true, img: null, duration: 1250},  // Emerging
     ];
     let staticSafeArr= [{bool: true, img: null, duration: 10000}];
 
