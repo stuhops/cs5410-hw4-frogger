@@ -263,6 +263,7 @@ game.createRiver = function(x, y, width, height, imgSrc) {
 
   function render() { 
     drawHitbox_(game.context);
+    drawRiverTexture_();
     renderRows_();
   }
 
@@ -331,6 +332,26 @@ game.createRiver = function(x, y, width, height, imgSrc) {
       { x: river.pos.x, y: river.pos.y + river.height },
       river.pos
     ];
+  }
+
+  function drawRiverTexture_() {
+    for(let i = 0; i < ROWS; i++) {
+      for(let j = 0; j < river.width / (river.height / ROWS); j++) {
+        game.renderSprite(
+          'river', 
+          {
+            x: river.pos.x + (river.height / ROWS)/2 + j * (river.height / ROWS),
+            y: river.pos.y + (river.height / ROWS)/2 + i * (river.height / ROWS),
+          },
+          {
+            width: river.height / ROWS,
+            height: river.height / ROWS,
+          },
+          0,
+          0
+        );
+      }
+    }
   }
 
   // -------------------------------------- Return ----------------------------------------

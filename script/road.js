@@ -210,6 +210,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
 
   function render() { 
     drawHitbox_(game.context);
+    drawRoadTexture_();
     renderRows_();
   }
 
@@ -293,6 +294,26 @@ game.createRoad = function(x, y, width, height, imgSrc) {
       { x: road.pos.x, y: road.pos.y + road.height },
       road.pos
     ];
+  }
+
+  function drawRoadTexture_() {
+    for(let i = 0; i < ROWS; i++) {
+      for(let j = 0; j < road.width / (road.height / ROWS); j++) {
+        game.renderSprite(
+          'road', 
+          {
+            x: road.pos.x + (road.height / ROWS)/2 + j * (road.height / ROWS),
+            y: road.pos.y + (road.height / ROWS)/2 + i * (road.height / ROWS),
+          },
+          {
+            width: road.height / ROWS,
+            height: road.height / ROWS,
+          },
+          0,
+          0
+        );
+      }
+    }
   }
 
   // -------------------------------------- Return ----------------------------------------

@@ -47,8 +47,26 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
       case 'lillyPad': break;
       case 'fly': break;
       case 'grass': break;
-      case 'water': break;
-      case 'road': break;
+      case 'river':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          227, 160,  // Start clipping x and y
+          80, 80,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
+      case 'road':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          316, 160,  // Start clipping x and y
+          80, 80,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
       case 'winBad': break;
       case 'winGood': break;
       case 'logLg': break;
@@ -92,7 +110,7 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
         case 'lillyPad': return 1;
         case 'fly': return 1;
         case 'grass': return 1;
-        case 'water': return 1;
+        case 'river': return 1;
         case 'road': return 1;
         case 'winBad': return 1;
         case 'winGood': return 1;
