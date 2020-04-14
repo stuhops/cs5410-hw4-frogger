@@ -115,7 +115,7 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           498, 160,  // Start clipping x and y
           80, 80,  // Width and height to clip
           center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
-          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 5  // Size x and y on canvas
         );
         break;
 
