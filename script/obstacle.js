@@ -16,6 +16,9 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   obstacle.angle = obstacle.speed >= 0 ? 0 : Math.PI;
   obstacle.img = {
     name: imgName,
+    num: 0,
+    baseTimer: 200,
+    timer: 200,
     length: game.renderSprite(imgName),
   }
   obstacle.safe = safeArr[0].bool;
@@ -34,6 +37,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   function update(elapsedTime) { 
     offsetPos_(obstacle.speed * elapsedTime * .001);
     updateState_(elapsedTime);
+    updateImage_(elapsedTime);
   }
 
   function render() { 
@@ -43,7 +47,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
       obstacle.pos.center, 
       {width: obstacle.width, height: obstacle.height}, 
       obstacle.angle, 
-      0
+      obstacle.img.num
     );
   }
 
@@ -115,8 +119,16 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
       obstacle.safe.iter = (obstacle.safe.iter + 1) % obstacle.safe.arr.length;
 
       obstacle.safe.bool = obstacle.safe.arr[obstacle.safe.iter].bool;
-      // obstacle.img = obstacle.safe.arr[obstacle.safe.iter].img
       obstacle.safe.timer += obstacle.safe.arr[obstacle.safe.iter].duration;
+    }
+  }
+
+  function updateImage_(elapsedTime) {
+    obstacle.img.timer -= elapsedTime;
+    if(obstacle.img.timer < 0) {
+      obstacle.img.num = (obstacle.img.num + 1) % obstacle.img.length;
+
+      obstacle.img.timer += obstacle.img.baseTimer;
     }
   }
 

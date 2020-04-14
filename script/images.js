@@ -44,14 +44,26 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
 
     switch (name) {
       case 'turtle':
-        game.context.drawImage(
-          game.assets.game_sprites,  // Image
-          400, 6,  // Start clipping x and y
-          75, 70,  // Width and height to clip
-          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
-          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
-        );
-        break;
+        if(number < 2) {
+          game.context.drawImage(
+            game.assets.game_sprites,  // Image
+            403 + 75 * number, 6,  // Start clipping x and y
+            72, 65,  // Width and height to clip
+            center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+            dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+          );
+          break;
+        }
+        else {
+          game.context.drawImage(
+            game.assets.game_sprites,  // Image
+            8 + 73 * (number - 2), 84,  // Start clipping x and y
+            72, 65,  // Width and height to clip
+            center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+            dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+          );
+          break;
+        }
 
         
       case 'turtleSink': break;
@@ -187,36 +199,32 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           dimensions.width, dimensions.height  // Size x and y on canvas
         );
         break;
-
-      default: return 0;
     }
 
     game.context.restore(); 
   }
 
   else {
-    let getLength = name => {
-      switch(name) {
-        case null: return 0;
-        case 'turtle': return 7;
-        case 'turtleSink': return 5;
-        case 'lillyPad': return 1;
-        case 'fly': return 1;
-        case 'grass': return 1;
-        case 'river': return 1;
-        case 'road': return 1;
-        case 'winBad': return 1;
-        case 'winGood': return 1;
-        case 'logLg': return 1;
-        case 'logMd': return 1;
-        case 'logSm': return 1;
-        case 'die': return 1;
-        case 'carFire': return 1;
-        case 'carSemi': return 1;
-        case 'carBlue': return 1;
-        case 'carGreen': return 1;
-        case 'carYellow': return 1;
-      }
+    switch(name) {
+      case null: return 0;
+      case 'turtle': return 7;
+      case 'turtleSink': return 5;
+      case 'lillyPad': return 1;
+      case 'fly': return 1;
+      case 'grass': return 1;
+      case 'river': return 1;
+      case 'road': return 1;
+      case 'winBad': return 1;
+      case 'winGood': return 1;
+      case 'logLg': return 1;
+      case 'logMd': return 1;
+      case 'logSm': return 1;
+      case 'die': return 1;
+      case 'carFire': return 1;
+      case 'carSemi': return 1;
+      case 'carBlue': return 1;
+      case 'carGreen': return 1;
+      case 'carYellow': return 1;
     }
   }
 };
