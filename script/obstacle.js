@@ -45,7 +45,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     game.renderSprite(
       obstacle.img.name, 
       obstacle.pos.center, 
-      {width: obstacle.width, height: obstacle.height}, 
+      {width: obstacle.width, height: obstacle.height*9 / 10}, 
       obstacle.angle, 
       obstacle.img.num
     );

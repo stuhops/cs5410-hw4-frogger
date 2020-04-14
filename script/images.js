@@ -124,7 +124,7 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           game.assets.game_sprites,  // Image
           12, 257,  // Start clipping x and y
           353, 58,  // Width and height to clip
-          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          center.x - dimensions.width/2, center.y - dimensions.height/2 + ((number-1)%2),  // Start x and y on canvas
           dimensions.width, dimensions.height  // Size x and y on canvas
         );
         break;
@@ -134,7 +134,7 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           game.assets.game_sprites,  // Image
           12, 327,  // Start clipping x and y
           276, 58,  // Width and height to clip
-          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          center.x - dimensions.width/2, center.y - dimensions.height/2 + ((number-1)%2),  // Start x and y on canvas
           dimensions.width, dimensions.height  // Size x and y on canvas
         );
         break;
@@ -144,7 +144,7 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           game.assets.game_sprites,  // Image
           386, 257,  // Start clipping x and y
           187, 58,  // Width and height to clip
-          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          center.x - dimensions.width/2, center.y - dimensions.height/2 + ((number-1)%2),  // Start x and y on canvas
           dimensions.width, dimensions.height  // Size x and y on canvas
         );
         break;
@@ -216,9 +216,9 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
       case 'road': return 1;
       case 'winBad': return 1;
       case 'winGood': return 1;
-      case 'logLg': return 1;
-      case 'logMd': return 1;
-      case 'logSm': return 1;
+      case 'logLg': return 4;
+      case 'logMd': return 4;
+      case 'logSm': return 4;
       case 'die': return 1;
       case 'carFire': return 1;
       case 'carSemi': return 1;
