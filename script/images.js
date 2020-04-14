@@ -43,6 +43,17 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
 
 
     switch (name) {
+      case 'turtle':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          400, 6,  // Start clipping x and y
+          75, 70,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
+        
       case 'turtleSink': break;
       case 'lillyPad': break;
       case 'fly': break;
