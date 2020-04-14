@@ -7,6 +7,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   char.pos = { 
     x: centerX, 
     y: centerY, 
+    angle: Math.PI,
     min: { 
       x: 0,
       y: 0,
@@ -28,7 +29,21 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     timer: 500,
     environmentDelta: 0,
   }
+  char.spriteNum = 0;
   char.done = false;
+
+  let sheet = {
+    width: 600,
+    height: 561,
+  }
+  let frog = {
+    clipWidth: 54,
+    clipHeight: sheet.height / 8,
+    offsetX: 57,
+    width: 2*char.radius,
+    height: 2*char.radius,
+    length: 6,
+  }
 
 
   // ---------------------------------- Main Functions ------------------------------------
@@ -39,7 +54,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   }
 
   function render() { 
-    drawHitCircle_(game.context);
+    renderFrog_();
   }
 
 
@@ -50,7 +65,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
         x: char.pos.x, 
         y: char.pos.y, 
       },
-      radius: char.radius, 
+      radius: char.radius * 3 / 4, 
     })
   }
   let getCenter = () => char.pos;
@@ -61,24 +76,28 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
         case 'up': 
           if(setNextMoveCenter_(0, -1)) {
             char.move.dir = 'up';
+            char.pos.angle = Math.PI;
             break;
           }
           else return
         case 'down': 
           if(setNextMoveCenter_(0, 1)) {
             char.move.dir = 'down'; 
+            char.pos.angle = 0;
             break;
           }
           else break
         case 'right': 
           if(setNextMoveCenter_(1, 0)) {
             char.move.dir = 'right'; 
+            char.pos.angle = 1.5 * Math.PI;
             break;
           }
           else break;
         case 'left': 
           if(setNextMoveCenter_(-1, 0)) {
             char.move.dir = 'left'; 
+            char.pos.angle = .5 * Math.PI;
             break;
           }
           else break;
@@ -118,6 +137,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     char.pos.x += char.move.environmentDelta * elapsedTime;
     if(char.move.dir !== 0) {
       char.move.timer -= elapsedTime;
+      char.spriteNum = frog.length - parseInt(char.move.timer / (char.move.baseTimer / frog.length)); 
       if(char.move.timer > 0) {
         switch(char.move.dir) {
           case 'up': offsetPos_(0, -(char.move.ppms * elapsedTime)); break;
@@ -127,6 +147,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
         } 
       }
       else {
+        char.spriteNum = 0;
         char.move.timer = 0;
         char.move.dir = 0;
         char.pos.nextCenter.x = char.pos.x
@@ -150,6 +171,22 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     }
     else 
       return false;
+  }
+
+  function renderFrog_() {
+
+    game.context.save();
+    game.context.translate(char.pos.x, char.pos.y);
+    game.context.rotate(char.pos.angle);
+    game.context.translate(-char.pos.x, -char.pos.y);
+    game.context.drawImage(
+      game.assets.game_sprites,  // Image
+      0 + char.spriteNum * frog.offsetX, 0,  // Start clipping x and y
+      frog.clipWidth, frog.clipHeight,  // Width and height to clip
+      char.pos.x - char.radius, char.pos.y - char.radius,  // Start x and y on canvas
+      frog.width, frog.height  // Size x and y on canvas
+    );
+    game.context.restore(); 
   }
 
   // -------------------------------------- Return ----------------------------------------

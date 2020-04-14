@@ -27,6 +27,7 @@ game = {
     // ------------ Audio ----------------
 
     // ------------ Images ---------------
+    assets: {},
 };
 
 //------------------------------------------------------------------
@@ -65,7 +66,10 @@ game.loader = (function() {
             message: 'Game Board loaded',
             onComplete: null
         }];
-    let assetOrder = [];
+    let assetOrder = [{
+            key: 'game_sprites',
+            source: '/assets/game_sprites.png'
+        }];
 
     //------------------------------------------------------------------
     //
