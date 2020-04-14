@@ -13,9 +13,10 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     }
   };
   obstacle.speed = speedInPixelsPerSecond;
+  obstacle.angle = obstacle.speed >= 0 ? 0 : Math.PI;
   obstacle.img = {
     name: imgName,
-    // length: game.renderSprite(imgName),
+    length: game.renderSprite(imgName),
   }
   obstacle.safe = safeArr[0].bool;
   if(!safeArr[0]) {
@@ -41,7 +42,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
       obstacle.img.name, 
       obstacle.pos.center, 
       {width: obstacle.width, height: obstacle.height}, 
-      Math.PI, 
+      obstacle.angle, 
       0
     );
   }

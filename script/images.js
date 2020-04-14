@@ -43,19 +43,28 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
 
 
     switch (name) {
-      case 'turtleSink': return 0;
-      case 'lillyPad': return 0;
-      case 'fly': return 0;
-      case 'grass': return 0;
-      case 'water': return 0;
-      case 'road': return 0;
-      case 'winBad': return 0;
-      case 'winGood': return 0;
-      case 'logLg': return 0;
-      case 'logMd': return 0;
-      case 'logSm': return 0;
-      case 'die': return 0;
-      case 'carFire': return 0;
+      case 'turtleSink': break;
+      case 'lillyPad': break;
+      case 'fly': break;
+      case 'grass': break;
+      case 'water': break;
+      case 'road': break;
+      case 'winBad': break;
+      case 'winGood': break;
+      case 'logLg': break;
+      case 'logMd': break;
+      case 'logSm': break;
+      case 'die': break;
+      case 'carFire': 
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          10, 400,  // Start clipping x and y
+          180, 80,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
       case 'carSemi': 
         game.context.drawImage(
           game.assets.game_sprites,  // Image
@@ -66,10 +75,9 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
         );
         break;
 
-
-      case 'carBlue': return 0;
-      case 'carGreen': return 0;
-      case 'carYellow': return 0;
+      case 'carBlue': break;
+      case 'carGreen': break;
+      case 'carYellow': break;
     }
 
     game.context.restore(); 

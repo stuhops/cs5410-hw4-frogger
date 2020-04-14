@@ -54,10 +54,10 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         1.75 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
-        [1 * road.offsets.width], // obstacleWidthArr
+        [2 * road.offsets.width], // obstacleWidthArr
         [6 * road.offsets.freq],   // freqArr
         1 * road.offsets.time,
-        [null]  // obstacleImgSrcArr
+        ['carFire']  // obstacleImgSrcArr
       )
     );
 
