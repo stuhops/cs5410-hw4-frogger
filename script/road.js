@@ -71,10 +71,10 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         -1.6 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
-        [.75 * road.offsets.width], // obstacleWidthArr
-        [4 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [2 * road.offsets.width], // obstacleWidthArr
+        [4 * road.offsets.freq, 2 * road.offsets.freq, 2 * road.offsets.freq],   // freqArr
         2 * road.offsets.time,
-        [null]  // obstacleImgSrcArr
+        ['carBlue']  // obstacleImgSrcArr
       )
     );
 
@@ -88,10 +88,10 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         1.6 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
-        [.75 * road.offsets.width], // obstacleWidthArr
-        [3.5 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [2 * road.offsets.width], // obstacleWidthArr
+        [3.5 * road.offsets.freq, 1.7 * road.offsets.freq, 1.7 * road.offsets.freq],   // freqArr
         3 * road.offsets.time,
-        [null]  // obstacleImgSrcArr
+        ['carGreen']  // obstacleImgSrcArr
       )
     );
 
@@ -105,10 +105,10 @@ game.createRoad = function(x, y, width, height, imgSrc) {
         -1.7 * road.offsets.speed,  // speedInPixelsPerSecond
         true,  // safe
         [staticSafeArr],  // obstacleSafeArr
-        [.75 * road.offsets.width], // obstacleWidthArr
-        [3 * road.offsets.freq, 1 * road.offsets.freq, 1 * road.offsets.freq],   // freqArr
+        [2 * road.offsets.width], // obstacleWidthArr
+        [3 * road.offsets.freq, 1.8 * road.offsets.freq, 1.8 * road.offsets.freq],   // freqArr
         4 * road.offsets.time,
-        // ['carSemi']  // obstacleImgSrcArr
+        ['carYellow']  // obstacleImgSrcArr
       )
     );
   } 

@@ -78,9 +78,36 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
 
       case 'winBad': break;
       case 'winGood': break;
-      case 'logLg': break;
-      case 'logMd': break;
-      case 'logSm': break;
+      case 'logLg':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          12, 257,  // Start clipping x and y
+          353, 58,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'logMd':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          12, 327,  // Start clipping x and y
+          276, 58,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'logSm':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          386, 257,  // Start clipping x and y
+          187, 58,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
       case 'die': break;
       case 'carFire': 
         game.context.drawImage(
@@ -102,9 +129,37 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
         );
         break;
 
-      case 'carBlue': break;
-      case 'carGreen': break;
-      case 'carYellow': break;
+      case 'carBlue':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          12, 483,  // Start clipping x and y
+          130, 70,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'carGreen': 
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          155, 483,  // Start clipping x and y
+          135, 70,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'carYellow':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          305, 483,  // Start clipping x and y
+          135, 70,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      default: return 0;
     }
 
     game.context.restore(); 
