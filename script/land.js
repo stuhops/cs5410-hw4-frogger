@@ -1,6 +1,6 @@
 game.createLand = function(x, y, width, height, imgSrc) {
   // ----------------------------------- Initialize ---------------------------------------
-  const ROWS = 5;
+  const ROWS = 1;
   let land = {};
 
   // if(imgSrc) land = loadImage(imSrc);
@@ -22,6 +22,7 @@ game.createLand = function(x, y, width, height, imgSrc) {
 
   function render() { 
     drawHitbox_(game.context);
+    drawLandTexture_();
   }
 
 
@@ -68,6 +69,26 @@ game.createLand = function(x, y, width, height, imgSrc) {
       { x: land.pos.x, y: land.pos.y + land.height },
       land.pos
     ];
+  }
+
+  function drawLandTexture_() {
+    for(let i = 0; i < ROWS; i++) {
+      for(let j = 0; j < land.width / (land.height / ROWS); j++) {
+        game.renderSprite(
+          'grass', 
+          {
+            x: land.pos.x + (land.height / ROWS)/2 + j * (land.height / ROWS),
+            y: land.pos.y + (land.height / ROWS)/2 + i * (land.height / ROWS),
+          },
+          {
+            width: land.height / ROWS,
+            height: land.height / ROWS,
+          },
+          0,
+          0
+        );
+      }
+    }
   }
 
   // -------------------------------------- Return ----------------------------------------
