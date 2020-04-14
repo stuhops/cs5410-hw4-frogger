@@ -209,7 +209,7 @@ game.createRoad = function(x, y, width, height, imgSrc) {
   }
 
   function render() { 
-    drawHitbox_(game.context);
+    // drawHitbox_(game.context);
     drawRoadTexture_();
     renderRows_();
   }

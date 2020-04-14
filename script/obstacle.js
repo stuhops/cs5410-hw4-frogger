@@ -37,7 +37,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   }
 
   function render() { 
-    drawHitbox_(game.context);
+    // drawHitbox_(game.context);
     game.renderSprite(
       obstacle.img.name, 
       obstacle.pos.center, 

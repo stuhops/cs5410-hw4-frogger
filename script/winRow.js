@@ -1,8 +1,8 @@
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Win Row >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr) {
+game.createWinRow = function(x, y, width, height) {
+  const ROWS = 1;
   let row = {};
-  // if(imgSrc) row = loadImage(fillImgSrc);
 
   row.pos = {
     x,
@@ -25,16 +25,12 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
     arr: [100],
     iterator: 0,
   }
-  // row.obstacleImgSrc = {
-  //   arr: obstacleImgSrcArr,
-  //   iterator: 0,
-  // };
   row.frequency = {
     arr: [0],
     iterator: 0,
   };
   row.slot = {
-    width: row.width / 22,
+    width: row.width / 11,
     height: row.height * 3/4,
     spacingOffset: 3*row.width / 44,
     spacing: row.width / 22 * 4.5,
@@ -50,7 +46,8 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
   }
 
   function render() {
-    drawHitbox_(game.context);
+    // drawHitbox_(game.context);
+    drawRowTexture_();
     for(let i = 0; i < row.obstacles.length; i++) {
       row.obstacles[i].render();
     }
@@ -92,7 +89,6 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
         if(!(hitbox[j].x < 0 || hitbox[j].x > row.width))
           break;
         else if(j === hitbox.length - 1) {
-          // TODO: Make sure that this doesn't throw an error
           row.obstacles.splice(i, 1);
           i--;
         }
@@ -111,14 +107,13 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
         row.pos.y + height - row.slot.height,  // y
         0,  // speedInPixelsPerSecond
         staticSafeArr,  // safe
-        // row.obstacleImgSrc.arr[row.obstacleImgSrc.iterator]  // imgSrc
+        'winRowGood'
       );
       row.obstacles.push(newObstacle);
 
       // Restart timer
       row.obstacleSafe.iterator = (row.obstacleSafe.iterator + 1) % row.obstacleSafe.arr.length;
       row.obstacleWidth.iterator = (row.obstacleWidth.iterator + 1) % row.obstacleWidth.arr.length;
-      // row.obstacleImgSrc.iterator = (row.obstacleImgSrc.iterator + 1) % row.obstacleImgSrc.arr.length;
       row.frequency.iterator = (row.frequency.iterator + 1) % row.frequency.arr.length;
 
       row.frequency.timer += row.frequency.arr[row.frequency.iterator];
@@ -151,6 +146,39 @@ game.createWinRow = function(x, y, width, height, fillImgSrc, obstacleImgSrcArr)
       { x: row.pos.x, y: row.pos.y + row.height },
       row.pos
     ];
+  }
+
+  function drawRowTexture_() {
+    for(let i = 0; i < ROWS; i++) {
+      for(let j = 0; j < row.width / (row.height / ROWS); j++) {
+        game.renderSprite(
+          'winRowBad', 
+          {
+            x: row.pos.x + (row.height / ROWS)/2 + j * (row.height / ROWS),
+            y: row.pos.y + (row.height / ROWS)/2 + i * (row.height / ROWS),
+          },
+          {
+            width: row.height / ROWS,
+            height: row.height / ROWS,
+          },
+          0,
+          0
+        );
+      }
+      // game.renderSprite(
+      //   'winRowGood', 
+      //   {
+      //     x: row.pos.x + (row.height / ROWS)/2 + j * (row.height / ROWS),
+      //     y: row.pos.y + (row.height / ROWS)/2 + i * (row.height / ROWS),
+      //   },
+      //   {
+      //     width: row.height / ROWS,
+      //     height: row.height / ROWS,
+      //   },
+      //   0,
+      //   0
+      // );
+    }
   }
 
   // -------------------------------------- Return ----------------------------------------

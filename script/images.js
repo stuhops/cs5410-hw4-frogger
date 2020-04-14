@@ -87,8 +87,26 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
         );
         break;
 
-      case 'winBad': break;
-      case 'winGood': break;
+      case 'winRowBad': 
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          409, 161,  // Start clipping x and y
+          78, 78,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
+      case 'winRowGood':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          498, 160,  // Start clipping x and y
+          80, 80,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
       case 'logLg':
         game.context.drawImage(
           game.assets.game_sprites,  // Image
