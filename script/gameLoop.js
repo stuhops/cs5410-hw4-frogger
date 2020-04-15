@@ -194,6 +194,7 @@ game.gameLoop = function() {
     game.winRow.setIdxDone(winIndex);
     newLife_();
     if(game.winRow.allIdxDone()) {
+      game.score += 1000;
       game.won = true;
       startGameOver_();
     }

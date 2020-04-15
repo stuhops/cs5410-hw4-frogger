@@ -102,6 +102,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       switch(dir) {
         case 'up': 
           if(setNextMoveCenter_(0, -1)) {
+            game.score += 10;
             char.move.dir = 'up';
             char.pos.angle = Math.PI;
             break;
@@ -109,6 +110,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
           else return
         case 'down': 
           if(setNextMoveCenter_(0, 1)) {
+            game.score -= 10;
             char.move.dir = 'down'; 
             char.pos.angle = 0;
             break;

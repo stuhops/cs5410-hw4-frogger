@@ -95,6 +95,7 @@ game.createWinRow = function(x, y, width, height) {
 
   function setIdxDone(idx) {
     row.idxDone++;
+    game.score += 50 + 10 * 2 * parseInt(game.timer / 1000);
 
     // ----------------- Display as done ----------------
     row.obstacles[idx].setSafe(false)
