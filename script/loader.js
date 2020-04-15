@@ -74,7 +74,10 @@ game.loader = (function() {
         }, {
             key: 'alligator_sprites',
             source: '/assets/alligator.png'
-        }];
+        }, {
+            key: 'fire',
+            source: '/assets/fire.png'
+        },];
 
     //------------------------------------------------------------------
     //

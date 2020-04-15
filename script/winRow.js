@@ -37,6 +37,8 @@ game.createWinRow = function(x, y, width, height) {
     spacing: row.width / 22 * 4.5,
   }
   row.obstacles = [];
+  row.particles = [];
+  row.obstaclesLevel2 = [];
   generateNewObstacles_();
 
 
@@ -44,6 +46,8 @@ game.createWinRow = function(x, y, width, height) {
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) {
     updateObstacles_(elapsedTime);
+    updateObstaclesLevel2_(elapsedTime);
+    updateParticles_(elapsedTime);
   }
 
   function render() {
@@ -51,6 +55,12 @@ game.createWinRow = function(x, y, width, height) {
     drawRowTexture_();
     for(let i = 0; i < row.obstacles.length; i++) {
       row.obstacles[i].render();
+    }
+    for(let i = 0; i < row.particles.length; i++) {
+      row.particles[i].vis.render();
+    }
+    for(let i = 0; i < row.obstaclesLevel2.length; i++) {
+      row.obstaclesLevel2[i].render();
     }
   }
 
@@ -74,10 +84,35 @@ game.createWinRow = function(x, y, width, height) {
   }
   let allIdxDone = () => row.idxDone >= 5;
 
-  let setIdxDone = idx => {
-    row.obstacles[idx].setSafe(false)
-    row.obstacles[idx].setImg('winRowDone')
+  function setIdxDone(idx) {
     row.idxDone++;
+
+    // ----------------- Display as done ----------------
+    row.obstacles[idx].setSafe(false)
+    let newObstacle = game.createObstacle(
+      row.slot.width,  // width
+      row.slot.height,  // height
+      row.slot.spacingOffset + row.slot.spacing * idx,  // x
+      row.pos.y + height - row.slot.height,  // y
+      0,  // speedInPixelsPerSecond
+      [{bool: false, img: null, duration: 10000}],  // safe
+      'winRowDone'
+    );
+    row.obstaclesLevel2.push(newObstacle);
+
+    // ---------------- Set up particles ---------------
+    let newVis = ParticleSystemCircularGravity(game.graphics, {
+      image: game.assets.fire,
+      center: row.obstacles[idx].getCenter(),
+      size: {mean: 20, stdev: 5},
+      speed: { mean: 0, stdev: 0.2},
+      lifetime: { mean: 1000, stdev: 100}
+    });
+    row.particles.push({
+      vis: newVis,
+      timer: 1500,
+    });
+
   };
 
 
@@ -100,6 +135,26 @@ game.createWinRow = function(x, y, width, height) {
           row.obstacles.splice(i, 1);
           i--;
         }
+      }
+    }
+  }
+
+  function updateObstaclesLevel2_(elapsedTime) {
+    for(let i = 0; i < row. obstaclesLevel2.length; i++) {
+      row.obstaclesLevel2[i].update(elapsedTime);
+    }
+  }
+
+  function updateParticles_(elapsedTime) {
+    for(let i = 0; i < row.particles.length; i++) {
+      row.particles[i].timer -= elapsedTime;
+
+      if(row.particles[i].timer < 0) {
+        row.particles.splice(i, 1);
+        i--;
+      }
+      else {
+        row.particles[i].vis.update(elapsedTime); 
       }
     }
   }
@@ -173,19 +228,6 @@ game.createWinRow = function(x, y, width, height) {
           0
         );
       }
-      // game.renderSprite(
-      //   'winRowGood', 
-      //   {
-      //     x: row.pos.x + (row.height / ROWS)/2 + j * (row.height / ROWS),
-      //     y: row.pos.y + (row.height / ROWS)/2 + i * (row.height / ROWS),
-      //   },
-      //   {
-      //     width: row.height / ROWS,
-      //     height: row.height / ROWS,
-      //   },
-      //   0,
-      //   0
-      // );
     }
   }
 

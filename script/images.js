@@ -142,13 +142,6 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
       case 'winRowDone':
         game.context.drawImage(
           game.assets.game_sprites,  // Image
-          498, 160,  // Start clipping x and y
-          80, 80,  // Width and height to clip
-          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
-          dimensions.width + 1.5, dimensions.height + 5  // Size x and y on canvas
-        );
-        game.context.drawImage(
-          game.assets.game_sprites,  // Image
           0, 0,  // Start clipping x and y
           54, 70,  // Width and height to clip
           center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas

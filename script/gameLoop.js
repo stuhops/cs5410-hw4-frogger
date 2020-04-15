@@ -1,3 +1,14 @@
+// TODO: MAKE INSECTS APPEAR
+// TODO: ALLIGATORS IN END ZONES
+// TODO: PARTICLE EFFECTS FROM AROUND THE LILLY PAD WHEN FROG ENTERS
+// TODO: PARTICLE EFFECTS WHEN FROG IS HIT BY A CAR
+// TODO: SOUND EFFECTS
+// TODO: SCORING (PER WIKIPEDIA ARTICLE IN DESCRIPTION)
+// TIMER USING VISUAL BAR
+// LIVES LEFT BY VISUAL FROGS
+// TODO: VISUAL DIFFERENCE WHEN SELECTING CONTROLS
+// TODO: TEST ON FIREFOX
+
 game.gameLoop = function() {
   let lastTime = performance.now();
   let requestFrame = true;
@@ -120,11 +131,11 @@ game.gameLoop = function() {
   }
 
   function renderItems_() {
-    game.winRow.render();
     game.river.render();
     game.middleLand.render();
     game.road.render();
     game.startLand.render();
+    game.winRow.render();
     game.char.render();
   }
 
