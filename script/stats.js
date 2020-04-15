@@ -77,11 +77,17 @@ game.createStatusBar = function(width, height, x, y) {
       height: height,
     }
   }
+  row.score = {
+    string: '',
+    x: row.width * .5 - 80,
+    y: y + height*5 / 8,
+    height: height / 2,
+  }
   row.timer = {
-    x: row.width / 2,
+    x: row.width * .70,
     y: y + height / 4,
     height: height / 2,
-    width: row.width * 15 / 32,
+    width: row.width * .30 * .85,
     audio: new Audio(game.audio.time),
   }
 
@@ -96,10 +102,12 @@ game.createStatusBar = function(width, height, x, y) {
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) {
     updateTimer_(elapsedTime);
+    updateScore_();
   }
 
   function render() {
     renderLives_();
+    renderScore_();
     renderTimer_();
   }
 
@@ -123,6 +131,10 @@ game.createStatusBar = function(width, height, x, y) {
 
   }
 
+  function updateScore_() {
+    row.score.string = 'Score: ' + game.score;
+  }
+
   function renderLives_() {
     for(let i = 0; i < game.lives; i++) {
       game.renderSprite(
@@ -137,6 +149,14 @@ game.createStatusBar = function(width, height, x, y) {
       );
     }
   }
+
+  function renderScore_() {
+    game.context.lineWidth = 1;
+    game.context.font = "32px Arial";
+    game.context.fillStyle = '#3bffff';
+    game.context.fillText(row.score.string, row.score.x, row.score.y);
+  }
+
   function renderTimer_() {
     // Fill
     context.lineWidth = 6;
