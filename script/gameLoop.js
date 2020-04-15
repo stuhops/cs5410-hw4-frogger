@@ -24,17 +24,16 @@ game.gameLoop = function() {
   function update(elapsedTime) {
     updateItems_(elapsedTime);
 
-    if(game.checkCollisions) {
+    if(game.checkCollisions)
       checkCollisions_();
-    }
+
     else if(game.char.isDead()) {
-      if(game.lives) {
+      if(game.lives)
         newLife_();
-      }
       else {
+        game.won = false;
         startGameOver_();
       }
-      game.char.setPos();
     }
   }
 
@@ -76,10 +75,10 @@ game.gameLoop = function() {
 
   // ---------------------------------------- Private ------------------------------------------- 
   function startGameOver_() {
+    game.char.setDead();
     game.gameOverTimer = 2000;
     document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
     game.gameOver = true;
-    game.won = false;
   }
 
   function gameOver_(time) {
@@ -88,20 +87,26 @@ game.gameLoop = function() {
 
     game.gameOverTimer -= elapsedTime;
     updateItems_(elapsedTime);
+    renderItems_();
 
-    if(game.won) {
-      if(game.gameOverTimer < 0) {
-        game.level++;
-        navigate('game-play')
-      }
-      else if(game.level == game.levels) {
+    if(game.gameOverTimer < 0) {
+      if(game.level == game.levels) {
         navigate('game-over');
+        return;
       }
+      else if(game.won) {
+          game.level++;
+          navigate('game-play')
+          return;
+      }
+    }
+    else if(!game.won) {
+      navigate('game-over');
+      return;
     }
     else {
-      navigate('game-over');
+      requestAnimationFrame(gameOver_);
     }
-    requestAnimationFrame(gameOver_);
   }
 
   function updateItems_(elapsedTime) {
@@ -157,11 +162,12 @@ game.gameLoop = function() {
   }
 
   function success_(winIndex) {
-    console.log('Success!!!!!');
     game.winRow.setIdxDone(winIndex);
     game.char.setPos();
-    // game.won = true;
-    // game.gameOver = true;
+    if(game.winRow.allIdxDone()) {
+      game.won = true;
+      startGameOver_();
+    }
   }
 
   return {

@@ -17,6 +17,7 @@ game.createWinRow = function(x, y, width, height) {
   row.height = height;
   row.speed = 0;
   row.posDir = true;
+  row.idxDone = 0;
   row.obstacleSafe = {
     arr: [true],
     iterator: 0,
@@ -71,10 +72,12 @@ game.createWinRow = function(x, y, width, height) {
     }
     return({ type: 1, deltaX: 0 })
   }
+  let allIdxDone = () => row.idxDone >= 5;
 
   let setIdxDone = idx => {
     row.obstacles[idx].setSafe(false)
     row.obstacles[idx].setImg('winRowDone')
+    row.idxDone++;
   };
 
 
@@ -192,6 +195,7 @@ game.createWinRow = function(x, y, width, height) {
     render,
 
     getCollisionType,
+    allIdxDone,
     setIdxDone,
   });
 }
