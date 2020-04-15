@@ -10,5 +10,5 @@ game.changeKey = function(value) {
 
 
 function manageControls() {
-  window.localStorage.setItem('frogger-controls', JSON.stringify({up: game.up, left: game.left, right: game.right}));
+  window.localStorage.setItem('frogger-controls', JSON.stringify({up: game.up, down: game.down, left: game.left, right: game.right}));
 }
