@@ -7,9 +7,11 @@ game = {
 
     // ---------- Game State -------------
     level: 1,
-    levels: 1,
+    levels: 2,
     gameOver: false,
     score: 100,
+    checkCollisions: true,
+    lives: 2,
 
     // ---------- Game Vars --------------
     rows: 14,

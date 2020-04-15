@@ -186,7 +186,16 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
         );
         break;
 
-      case 'die': break;
+      case 'die':
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          300, 330,  // Start clipping x and y
+          70, 50,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
       case 'carFire': 
         game.context.drawImage(
           game.assets.game_sprites,  // Image

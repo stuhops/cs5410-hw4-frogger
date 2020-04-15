@@ -3,6 +3,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
 
   // if(imgSrc) char = loadImage(imSrc);
 
+  char.state = 'alive';
   char.radius = radius;
   char.pos = { 
     x: centerX, 
@@ -20,9 +21,13 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       x: centerX,
       y: centerY,
     },
+    startCenter: {
+      x: centerX,
+      y: centerY,
+    },
   };
   char.move = {
-    dir: 2,
+    dir: 0,
     baseTimer: moveTime,
     dist: moveDist,
     ppms: moveDist / moveTime,
@@ -30,7 +35,14 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     environmentDelta: 0,
   }
   char.spriteNum = 0;
-  char.done = false;
+  char.status = {
+    dead: false,
+    dying: {
+      bool: false,
+      baseTimer: 2000,
+      timer: 2000,
+    },
+  };
 
   let sheet = {
     width: 600,
@@ -48,13 +60,21 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
 
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) { 
-    if(!char.done) {
+    if(char.status.dying.bool) {
+      updateDying_(elapsedTime);
+    }
+    else if(!char.status.dead) {
       move_(elapsedTime);
     }
   }
 
   function render() { 
-    renderFrog_();
+    if(char.status.dying.bool) {
+      renderDying_();
+    }
+    else if(!char.status.dead) {
+      renderFrog_();
+    }
   }
 
 
@@ -69,6 +89,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     })
   }
   let getCenter = () => char.pos;
+  let isDead = () => char.status.dead;
 
   let setMove = dir => {
     if(char.move.dir === 0) {
@@ -107,12 +128,18 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       char.move.timer = char.move.baseTimer;
     }
   }
-  let setDone = (bool, x=char.pos.nextCenter.x, y=char.pos.nextCenter.y) => {
-    char.pos.x = x;
-    char.pos.y = y;
-    char.done = bool;
+  let setDead = () => char.status.dead = true;
+  let setDying = () => {
+    char.status.dying.bool = true;
+    char.status.dying.timer = char.status.dying.baseTimer;
   }
   let setDeltaX = delta => char.move.environmentDelta = delta;
+  let setPos = (x=char.pos.startCenter.x, y=char.pos.startCenter.y) => {
+    char.pos.x = x;
+    char.pos.y = y;
+    char.pos.angle = Math.PI;
+    char.move.dir = 0;
+  }
 
   // --------------------------------- Private Functions ----------------------------------
   let drawHitCircle_ = context => {
@@ -189,6 +216,18 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     game.context.restore(); 
   }
 
+  function updateDying_(elapsedTime) {
+    char.status.dying.timer -= elapsedTime;
+    offsetPos_(0, elapsedTime / 100);
+    if(char.status.dying.timer < 0) {
+      char.status.dead = true;
+      char.status.dying = false;
+    }
+  }
+
+  function renderDying_() {
+    game.renderSprite('die', char.pos, {width: char.radius * 3, height: char.radius * 3}, char.status.dying.timer / char.status.dying.baseTimer, 0);
+  }
   // -------------------------------------- Return ----------------------------------------
   return ({
     // Main Functions
@@ -199,9 +238,12 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     // Getters and Setters
     getHitCircle,
     getCenter,
+    isDead,
 
     setMove,
-    setDone,
+    setDead,
+    setDying,
     setDeltaX,
+    setPos,
   });
 }

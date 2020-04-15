@@ -20,45 +20,17 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
-    // game.domStats.update;
-    game.char.update(elapsedTime, game.charDeltaX);
-    game.winRow.update(elapsedTime);
-    game.river.update(elapsedTime);
-    game.middleLand.update(elapsedTime);
-    game.road.update(elapsedTime);
-    game.startLand.update(elapsedTime);
+    updateItems_(elapsedTime);
 
-    game.char.setDeltaX(0);
-    let hitCircle = game.char.getHitCircle();
-    let winRowCol = game.winRow.getCollisionType(hitCircle);
-    let riverCol = game.river.getCollisionType(hitCircle);
-    let roadCol = game.road.getCollisionType(hitCircle);
-
-    if(winRowCol.type !== 1 || riverCol.type !== 1 || roadCol.type !== 1) {
-      if(!(winRowCol.type * riverCol.type * roadCol.type)) {
-        game.winRow.getCollisionType(hitCircle);
-        console.log("SPLAT!! End game");
-        game.won = false;
-        game.gameOver = true;
-      }
-      else if (riverCol.type === 2) {
-        console.log('On a log');
-        game.char.setDeltaX(riverCol.deltaX);
-      }
-      else if (winRowCol.type === 3) {
-        console.log('Winner!!!!!');
-        game.winRow.setIdxDone(winRowCol.index);
-        game.char = game.createCharacter(
-          .5 * game.gameHeight / game.rows,  // radius
-          game.gameWidth / 2,  // centerX
-          (game.rows - .5) * game.gameHeight / game.rows,  // centerY
-          game.gameHeight / game.rows,  // moveDist
-          250  // moveTime
-        );
-        // game.won = true;
-        // game.gameOver = true;
-      }
-    } 
+    // if(!game.lives) {
+    //   gameOver_();
+    // }
+    if(game.checkCollisions) {
+      checkCollisions_();
+    }
+    else if(game.char.isDead()) {
+      game.char.setPos();
+    }
   }
 
 
@@ -100,7 +72,10 @@ game.gameLoop = function() {
     requestFrame = false;
   }
 
-  function gameOver(elapsedTime) {
+
+
+  // ---------------------------------------- Private ------------------------------------------- 
+  function gameOver_(elapsedTime) {
     game.gameOverTimer -= elapsedTime;
     document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
     document.getElementById('my-score').innerHTML = '100';
@@ -117,6 +92,51 @@ game.gameLoop = function() {
     else {
       navigate('game-over');
     }
+  }
+
+  function updateItems_(elapsedTime) {
+    // game.domStats.update;
+    game.char.update(elapsedTime, game.charDeltaX);
+    game.winRow.update(elapsedTime);
+    game.river.update(elapsedTime);
+    game.middleLand.update(elapsedTime);
+    game.road.update(elapsedTime);
+    game.startLand.update(elapsedTime);
+  }
+
+  function checkCollisions_() {
+    game.char.setDeltaX(0);
+    let hitCircle = game.char.getHitCircle();
+    let winRowCol = game.winRow.getCollisionType(hitCircle);
+    let riverCol = game.river.getCollisionType(hitCircle);
+    let roadCol = game.road.getCollisionType(hitCircle);
+
+    if(winRowCol.type !== 1 || riverCol.type !== 1 || roadCol.type !== 1) {
+      if(!(winRowCol.type * riverCol.type * roadCol.type)) {
+        loseALife_(hitCircle);
+      }
+      else if (riverCol.type === 2) {
+        game.char.setDeltaX(riverCol.deltaX);
+      }
+      else if (winRowCol.type === 3) {
+        success_(winRowCol.index);
+      }
+    } 
+  }
+
+  function loseALife_(hitCircle) {
+    game.winRow.getCollisionType(hitCircle);
+    game.won = false;
+    game.char.setDying();
+    game.checkCollisions = false;
+  }
+
+  function success_(winIndex) {
+    console.log('Success!!!!!');
+    game.winRow.setIdxDone(winIndex);
+    game.char.setPos();
+    // game.won = true;
+    // game.gameOver = true;
   }
 
   return {
