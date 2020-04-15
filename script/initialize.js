@@ -79,7 +79,7 @@ function newGame() {
     // parseInt(game.rows - 1) * (game.gameHeight / game.rows),  // y
   )
 
-  game.timer = 5000;
+  game.timer = 30000;
   game.baseTimer = 30000;
   game.lives = 3;
   game.won = true;

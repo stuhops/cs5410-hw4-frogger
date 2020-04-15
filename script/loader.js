@@ -30,6 +30,9 @@ game = {
     right: 'ArrowRight',
 
     // ------------ Audio ----------------
+    audio: {
+        win: './assets/win.mp3',
+    },
 
     // ------------ Images ---------------
     assets: {},

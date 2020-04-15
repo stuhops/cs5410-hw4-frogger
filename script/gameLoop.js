@@ -193,7 +193,7 @@ game.gameLoop = function() {
 
   function success_(winIndex) {
     game.winRow.setIdxDone(winIndex);
-    game.char.setPos();
+    newLife_();
     if(game.winRow.allIdxDone()) {
       game.won = true;
       startGameOver_();

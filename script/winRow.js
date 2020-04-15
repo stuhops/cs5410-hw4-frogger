@@ -36,6 +36,11 @@ game.createWinRow = function(x, y, width, height) {
     spacingOffset: 3*row.width / 44,
     spacing: row.width / 22 * 4.5,
   }
+
+  row.audio = {
+    win: new Audio(game.audio.win),
+  }
+
   row.obstacles = [];
   row.particles = [];
   row.obstaclesLevel2 = [];
@@ -61,6 +66,10 @@ game.createWinRow = function(x, y, width, height) {
     }
     for(let i = 0; i < row.obstaclesLevel2.length; i++) {
       row.obstaclesLevel2[i].render();
+    }
+
+    if(row.particles.length) {
+      row.audio.win.play();
     }
   }
 
