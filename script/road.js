@@ -205,11 +205,13 @@ game.createRoad = function(x, y, width, height) {
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) { 
     updateRows_(elapsedTime);
+    updateGuts_(elapsedTime);
   }
 
   function render() { 
     // drawHitbox_(game.context);
     drawRoadTexture_();
+    renderGuts_();
     renderRows_();
   }
 
@@ -261,9 +263,30 @@ game.createRoad = function(x, y, width, height) {
     }
   }
 
+  function updateGuts_(elapsedTime) {
+    for(let i = 0; i < game.guts.length; i++) {
+      game.guts[i].timer -= elapsedTime;
+      game.guts[i].pauseTimer -= elapsedTime;
+
+      if(game.guts[i].timer < 0) {
+        game.guts.splice(i, 1);
+        i--;
+      }
+      else if(game.guts[i].pauseTimer > 0) {
+        game.guts[i].vis.update(elapsedTime);
+      }
+    }
+  }
+
   function renderRows_() {
     for(let i = 0; i < road.rows.length; i++) {
       road.rows[i].render();
+    }
+  }
+
+  function renderGuts_() {
+    for(let i = 0; i < game.guts.length; i++) {
+      game.guts[i].vis.render();
     }
   }
 

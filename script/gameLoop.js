@@ -1,6 +1,5 @@
 // TODO: MAKE INSECTS APPEAR
 // TODO: ALLIGATORS IN END ZONES
-// TODO: PARTICLE EFFECTS FROM AROUND THE LILLY PAD WHEN FROG ENTERS
 // TODO: PARTICLE EFFECTS WHEN FROG IS HIT BY A CAR
 // TODO: SOUND EFFECTS
 // TODO: SCORING (PER WIKIPEDIA ARTICLE IN DESCRIPTION)
@@ -131,10 +130,10 @@ game.gameLoop = function() {
   }
 
   function renderItems_() {
-    game.river.render();
     game.middleLand.render();
-    game.road.render();
     game.startLand.render();
+    game.river.render();
+    game.road.render();
     game.winRow.render();
     game.char.render();
   }
@@ -170,6 +169,22 @@ game.gameLoop = function() {
     game.winRow.getCollisionType(hitCircle);
     game.char.setDying();
     game.checkCollisions = false;
+
+    // -------------- Create Guts ---------------
+    if(game.char.getCenter().y > parseInt(game.rows / 2 + 1) * (game.gameHeight / game.rows)) {
+      let newVis = ParticleSystemCircularGravity(game.graphics, {
+        image: game.assets.guts,
+        center: game.char.getCenter(),
+        size: {mean: 20, stdev: 5},
+        speed: { mean: 0, stdev: 0.2},
+        lifetime: { mean: 1000, stdev: 100}
+      });
+      game.guts.push({
+        vis: newVis,
+        pauseTimer: 300,
+        timer: 2000,
+      });
+    }
   }
 
   function success_(winIndex) {

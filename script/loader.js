@@ -16,6 +16,7 @@ game = {
     // ---------- Game Vars --------------
     rows: 14,
     obstacles: [],
+    guts: [],
 
     // --------- High Scores -------------
     highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],
@@ -77,6 +78,9 @@ game.loader = (function() {
         }, {
             key: 'fire',
             source: '/assets/fire.png'
+        }, {
+            key: 'guts',
+            source: '/assets/guts.png'
         },];
 
     //------------------------------------------------------------------
