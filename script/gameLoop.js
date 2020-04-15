@@ -4,17 +4,19 @@ game.gameLoop = function() {
 
   function processInput() {
     for(input in inputBuffer) {
-      if(input === game.up)
-        game.char.setMove('up');
+      if(!game.char.isDead() && !game.char.isDying()) {
+        if(input === game.up)
+          game.char.setMove('up');
 
-      else if(input === game.down)
-        game.char.setMove('down');
+        else if(input === game.down)
+          game.char.setMove('down');
 
-      else if(input === game.right)
-        game.char.setMove('right');
+        else if(input === game.right)
+          game.char.setMove('right');
 
-      else if(input === game.left)
-        game.char.setMove('left');
+        else if(input === game.left)
+          game.char.setMove('left');
+      }
     }
   }
 
@@ -22,9 +24,6 @@ game.gameLoop = function() {
   function update(elapsedTime) {
     updateItems_(elapsedTime);
 
-    // if(!game.lives) {
-    //   gameOver_();
-    // }
     if(game.checkCollisions) {
       checkCollisions_();
     }
@@ -33,8 +32,7 @@ game.gameLoop = function() {
         newLife_();
       }
       else {
-        game.gameOver = true;
-        game.won = false;
+        startGameOver_();
       }
       game.char.setPos();
     }
@@ -59,7 +57,7 @@ game.gameLoop = function() {
       requestAnimationFrame(gameLoop);
     }
     else {
-      // gameOver(elapsedTime);
+      requestAnimationFrame(gameOver_);
     }
   }
 
@@ -77,10 +75,19 @@ game.gameLoop = function() {
 
 
   // ---------------------------------------- Private ------------------------------------------- 
-  function gameOver_(elapsedTime) {
-    game.gameOverTimer -= elapsedTime;
+  function startGameOver_() {
+    game.gameOverTimer = 2000;
     document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
-    document.getElementById('my-score').innerHTML = '100';
+    game.gameOver = true;
+    game.won = false;
+  }
+
+  function gameOver_(time) {
+    let elapsedTime = time - lastTime;
+    lastTime = time 
+
+    game.gameOverTimer -= elapsedTime;
+    updateItems_(elapsedTime);
 
     if(game.won) {
       if(game.gameOverTimer < 0) {
@@ -94,6 +101,7 @@ game.gameLoop = function() {
     else {
       navigate('game-over');
     }
+    requestAnimationFrame(gameOver_);
   }
 
   function updateItems_(elapsedTime) {
