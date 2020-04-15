@@ -22,6 +22,9 @@ game.createRoad = function(x, y, width, height) {
     freq: 1700 * mainOffset,
     time: 1696,
   };
+  road.audio = {
+    squash: new Audio(game.audio.squash),
+  }
 
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
@@ -223,20 +226,26 @@ game.createRoad = function(x, y, width, height) {
     if(row >= 0 && row <= road.rows.length) {
       if(row > 0) {
         let collision = road.rows[row - 1].getCollisionType(hitCircle);
-        if(collision.type !== 1)
+        if(collision.type !== 1) {
+          road.audio.squash.play();
           return collision;
+        }
       }
 
       if(row < road.rows.length) {
         let collision = road.rows[row].getCollisionType(hitCircle);
-        if(collision.type !== 1)
+        if(collision.type !== 1){
+          road.audio.squash.play();
           return collision;
+        }
       }
 
       if(row + 1 < road.rows.length) {
         let collision = road.rows[row + 1].getCollisionType(hitCircle);
-        if(collision.type !== 1)
+        if(collision.type !== 1){
+          road.audio.squash.play();
           return collision;
+        }
       }
     }
 

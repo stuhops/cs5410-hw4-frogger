@@ -23,6 +23,9 @@ game.createRiver = function(x, y, width, height, imgSrc) {
     freq: 1700 * mainOffset,
     time: 1696,
   };
+  river.audio = {
+    splash: new Audio(game.audio.splash),
+  }
 
   // ------------------------------- Initialize From Level --------------------------------
   if(game.level === 1) {
@@ -274,6 +277,8 @@ game.createRiver = function(x, y, width, height, imgSrc) {
 
     if(row >= 0 && row < river.rows.length && !Object.is(row, -0)) {
       let collision = river.rows[row].getCollisionType(hitCircle);
+      if(collision.type === 0)
+        river.audio.splash.play();
       return collision;
     }
 
