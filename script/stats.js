@@ -82,6 +82,7 @@ game.createStatusBar = function(width, height, x, y) {
     y: y + height / 4,
     height: height / 2,
     width: row.width * 15 / 32,
+    audio: new Audio(game.audio.time),
   }
 
   row.timer.fullBox = [
@@ -108,6 +109,10 @@ game.createStatusBar = function(width, height, x, y) {
   // --------------------------------- Private Functions ----------------------------------
   function updateTimer_(elapsedTime) {
     game.timer -= elapsedTime;
+
+    if(game.timer / game.baseTimer < .3 && game.timer / game.baseTimer > .25)
+      row.timer.audio.play();
+
     row.timer.box = [
       { x: row.timer.x, y: row.timer.y + row.timer.height}, 
       { x: row.timer.x + row.timer.width * (game.timer / game.baseTimer), y: row.timer.y + row.timer.height}, 
