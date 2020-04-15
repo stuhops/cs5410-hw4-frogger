@@ -29,6 +29,13 @@ game.gameLoop = function() {
       checkCollisions_();
     }
     else if(game.char.isDead()) {
+      if(game.lives) {
+        newLife_();
+      }
+      else {
+        game.gameOver = true;
+        game.won = false;
+      }
       game.char.setPos();
     }
   }
@@ -36,12 +43,7 @@ game.gameLoop = function() {
 
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    game.winRow.render();
-    game.river.render();
-    game.middleLand.render();
-    game.road.render();
-    game.startLand.render();
-    game.char.render();
+    renderItems_();
   }
 
 
@@ -104,6 +106,15 @@ game.gameLoop = function() {
     game.startLand.update(elapsedTime);
   }
 
+  function renderItems_() {
+    game.winRow.render();
+    game.river.render();
+    game.middleLand.render();
+    game.road.render();
+    game.startLand.render();
+    game.char.render();
+  }
+
   function checkCollisions_() {
     game.char.setDeltaX(0);
     let hitCircle = game.char.getHitCircle();
@@ -124,9 +135,15 @@ game.gameLoop = function() {
     } 
   }
 
+  function newLife_() {
+    game.char.setAlive();
+    game.char.setPos();
+    game.checkCollisions = true;
+  }
+
   function loseALife_(hitCircle) {
+    game.lives--;
     game.winRow.getCollisionType(hitCircle);
-    game.won = false;
     game.char.setDying();
     game.checkCollisions = false;
   }

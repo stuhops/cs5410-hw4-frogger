@@ -90,6 +90,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
   }
   let getCenter = () => char.pos;
   let isDead = () => char.status.dead;
+  let isDying = () => char.status.dying.bool;
 
   let setMove = dir => {
     if(char.move.dir === 0) {
@@ -129,6 +130,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     }
   }
   let setDead = () => char.status.dead = true;
+  let setAlive = () => char.status.dead = false;
   let setDying = () => {
     char.status.dying.bool = true;
     char.status.dying.timer = char.status.dying.baseTimer;
@@ -221,7 +223,7 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     offsetPos_(0, elapsedTime / 100);
     if(char.status.dying.timer < 0) {
       char.status.dead = true;
-      char.status.dying = false;
+      char.status.dying.bool = false;
     }
   }
 
@@ -239,9 +241,11 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
     getHitCircle,
     getCenter,
     isDead,
+    isDying,
 
     setMove,
     setDead,
+    setAlive,
     setDying,
     setDeltaX,
     setPos,

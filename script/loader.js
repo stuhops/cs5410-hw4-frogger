@@ -11,7 +11,7 @@ game = {
     gameOver: false,
     score: 100,
     checkCollisions: true,
-    lives: 2,
+    lives: 3,
 
     // ---------- Game Vars --------------
     rows: 14,

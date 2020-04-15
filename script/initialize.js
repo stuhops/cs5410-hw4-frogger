@@ -71,6 +71,8 @@ function newGame() {
     game.gameHeight / game.rows * 1 // height
   );
 
-  game.lives = 2;
+  game.lives = 3;
+  game.won = true;
+  game.gameOver = false;
   game.gameLoop.start();
 }
