@@ -42,13 +42,24 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
 
   function render() { 
     // drawHitbox_(game.context);
-    game.renderSprite(
-      obstacle.img.name, 
-      obstacle.pos.center, 
-      {width: obstacle.width, height: obstacle.height*9 / 10}, 
-      obstacle.angle, 
-      obstacle.img.num
-    );
+    if(obstacle.img.name === 'alligatorBody') {
+      game.renderSprite(
+        obstacle.img.name, 
+        obstacle.pos.center, 
+        {width: obstacle.width * 3/4, height: obstacle.height*9 / 10}, 
+        obstacle.angle, 
+        obstacle.img.num
+      );
+    }
+    else {
+      game.renderSprite(
+        obstacle.img.name, 
+        obstacle.pos.center, 
+        {width: obstacle.width, height: obstacle.height*9 / 10}, 
+        obstacle.angle, 
+        obstacle.img.num
+      );
+    }
   }
 
 
@@ -157,7 +168,19 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
         );
       }
     }
+
+    re = /alligatorHead.*/;
+    if(re.test(obstacle.img.name)) {
+      if(obstacle.safe.iter === 0) {
+        obstacle.img.name = 'alligatorHeadClosed';
+      }
+      else if(obstacle.safe.iter === 1) {
+        obstacle.img.name = 'alligatorHeadOpen';
+      }
+      else console.log('ERROR WHEN OPENING AND CLOSING ALLIGATOR MOUTH');
+    }
   }
+
 
   // -------------------------------------- Return ----------------------------------------
   return ({
@@ -310,7 +333,7 @@ game.createObstacleRow = function(
           row.pos.y,  // y
           row.speed,  // speedInPixelsPerSecond
           row.obstacleSafe.arr[row.obstacleSafe.iterator][0].bodySafe,  // safe
-          row.obstacleImg.arr[row.obstacleImg.iterator]  // imgSrc
+          'alligatorBody'  // imgSrc
         );
         let newHead = game.createObstacle(
           row.obstacleWidth.arr[row.obstacleWidth.iterator] / 4,  // width
@@ -319,7 +342,7 @@ game.createObstacleRow = function(
           row.pos.y,  // y
           row.speed,  // speedInPixelsPerSecond
           row.obstacleSafe.arr[row.obstacleSafe.iterator],  // safe
-          null  // imgSrc
+          'alligatorHead' // imgSrc
         );
         
         row.obstacles.push(newObstacle);

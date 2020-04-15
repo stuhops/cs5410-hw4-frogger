@@ -71,6 +71,9 @@ game.loader = (function() {
     let assetOrder = [{
             key: 'game_sprites',
             source: '/assets/game_sprites.png'
+        }, {
+            key: 'alligator_sprites',
+            source: '/assets/alligator.png'
         }];
 
     //------------------------------------------------------------------

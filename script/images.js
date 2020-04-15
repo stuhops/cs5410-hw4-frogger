@@ -245,6 +245,37 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
           dimensions.width, dimensions.height  // Size x and y on canvas
         );
         break;
+
+      case 'alligatorBody':
+        game.context.drawImage(
+          game.assets.alligator_sprites,  // Image
+          0, 0,  // Start clipping x and y
+          155, 79,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'alligatorHeadOpen':
+        game.context.drawImage(
+          game.assets.alligator_sprites,  // Image
+          192, 0,  // Start clipping x and y
+          73, 79,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
+      case 'alligatorHeadClosed':
+        game.context.drawImage(
+          game.assets.alligator_sprites,  // Image
+          307, 0,  // Start clipping x and y
+          73, 79,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width, dimensions.height  // Size x and y on canvas
+        );
+        break;
+
     }
 
     game.context.restore(); 
