@@ -56,6 +56,8 @@ game.createStatusBar = function(width, height, x, y) {
   if(!game.timer) game.timer = 0;
   let row = {};
 
+  row.width = width;
+  row.height = height;
   row.pos = {
     x,
     y,
@@ -75,8 +77,20 @@ game.createStatusBar = function(width, height, x, y) {
       height: height,
     }
   }
-  row.width = width;
-  row.height = height;
+  row.timer = {
+    x: row.width / 2,
+    y: y + height / 4,
+    height: height / 2,
+    width: row.width * 15 / 32,
+  }
+
+  row.timer.fullBox = [
+    { x: row.timer.x, y: row.timer.y + row.timer.height}, 
+    { x: row.timer.x + row.timer.width, y: row.timer.y + row.timer.height}, 
+    { x: row.timer.x + row.timer.width, y: row.timer.y + row.timer.height - row.timer.height},
+    { x: row.timer.x, y: row.timer.y + row.timer.height - row.timer.height},
+    { x: row.timer.x, y: row.timer.y + row.timer.height}, 
+  ];
 
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) {
@@ -92,9 +106,19 @@ game.createStatusBar = function(width, height, x, y) {
   // -------------------------------- Getters and Setters----------------------------------
 
   // --------------------------------- Private Functions ----------------------------------
-  function updateTimer_(elapsedTime) {}
+  function updateTimer_(elapsedTime) {
+    game.timer -= elapsedTime;
+    row.timer.box = [
+      { x: row.timer.x, y: row.timer.y + row.timer.height}, 
+      { x: row.timer.x + row.timer.width * (game.timer / game.baseTimer), y: row.timer.y + row.timer.height}, 
+      { x: row.timer.x + row.timer.width * (game.timer / game.baseTimer), y: row.timer.y + row.timer.height - row.timer.height},
+      { x: row.timer.x, y: row.timer.y + row.timer.height - row.timer.height},
+      { x: row.timer.x, y: row.timer.y + row.timer.height}, 
+    ];
 
-  function renderLives_(elapsedTime) {
+  }
+
+  function renderLives_() {
     for(let i = 0; i < game.lives; i++) {
       game.renderSprite(
         'frog', 
@@ -108,12 +132,38 @@ game.createStatusBar = function(width, height, x, y) {
       );
     }
   }
-  function renderTimer_(elapsedTime) {}
+  function renderTimer_() {
+    // Fill
+    context.lineWidth = 6;
+    context.fillStyle = '#3bffff';
+    context.beginPath();
+    context.moveTo(row.timer.box[0].x, row.timer.box[0].y);
+
+    for(let i = 1; i < row.timer.box.length; i++) {
+      context.lineTo(row.timer.box[i].x, row.timer.box[i].y);
+    }
+
+    context.closePath();
+    context.fill();
+
+    // Base outline
+    context.strokeStyle = 'black';
+    context.lineWidth = 6;
+    context.beginPath();
+    context.moveTo(row.timer.fullBox[0].x, row.timer.fullBox[0].y);
+
+    for(let i = 1; i < row.timer.fullBox.length; i++) {
+      context.lineTo(row.timer.fullBox[i].x, row.timer.fullBox[i].y);
+    }
+
+    context.closePath();
+    context.stroke();
+
+  }
 
   // -------------------------------------- Return ----------------------------------------
   return ({
     update,
     render,
-
   });
 }
