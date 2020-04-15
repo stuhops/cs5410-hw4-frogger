@@ -17,6 +17,7 @@ game = {
     rows: 14,
     obstacles: [],
     guts: [],
+    timer: 0,
 
     // --------- High Scores -------------
     highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],

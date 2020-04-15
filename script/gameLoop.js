@@ -1,10 +1,9 @@
+// LIVES LEFT BY VISUAL FROGS
+// TIMER USING VISUAL BAR
 // TODO: MAKE INSECTS APPEAR
 // TODO: ALLIGATORS IN END ZONES
-// TODO: PARTICLE EFFECTS WHEN FROG IS HIT BY A CAR
 // TODO: SOUND EFFECTS
 // TODO: SCORING (PER WIKIPEDIA ARTICLE IN DESCRIPTION)
-// TIMER USING VISUAL BAR
-// LIVES LEFT BY VISUAL FROGS
 // TODO: VISUAL DIFFERENCE WHEN SELECTING CONTROLS
 // TODO: TEST ON FIREFOX
 
@@ -32,6 +31,7 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
+    game.statusBar.update(elapsedTime);
     updateItems_(elapsedTime);
 
     if(game.checkCollisions)
@@ -51,6 +51,7 @@ game.gameLoop = function() {
   function render() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     renderItems_();
+    game.statusBar.render();
   }
 
 

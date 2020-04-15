@@ -71,6 +71,14 @@ function newGame() {
     game.gameHeight / game.rows * 1 // height
   );
 
+  game.statusBar = game.createStatusBar(
+    game.gameWidth,
+    game.gameHeight / game.rows,
+    0,
+    0,
+    // parseInt(game.rows - 1) * (game.gameHeight / game.rows),  // y
+  )
+
   game.lives = 3;
   game.won = true;
   game.gameOver = false;
