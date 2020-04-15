@@ -79,6 +79,8 @@ function newGame() {
     // parseInt(game.rows - 1) * (game.gameHeight / game.rows),  // y
   )
 
+  document.getElementById('background-music').play();
+
   game.timer = 30000;
   game.baseTimer = 30000;
   game.lives = 3;

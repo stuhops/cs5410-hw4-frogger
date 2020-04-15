@@ -43,6 +43,9 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
       timer: 2000,
     },
   };
+  char.audio = {
+    move: new Audio(game.audio.move),
+  }
 
   let sheet = {
     width: 600,
@@ -94,6 +97,8 @@ game.createCharacter = function(radius, centerX, centerY, moveDist, moveTime) {
 
   let setMove = dir => {
     if(char.move.dir === 0) {
+      char.audio.move.currentTime = 0;
+      char.audio.move.play();
       switch(dir) {
         case 'up': 
           if(setNextMoveCenter_(0, -1)) {
