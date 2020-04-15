@@ -32,6 +32,12 @@ game = {
     // ------------ Audio ----------------
     audio: {
         win: './assets/win.mp3',
+        move: './assets/move.mp3',
+        extra: './assets/extra.mp3',
+        background: './assets/background.mp3',
+        splash: './assets/splash.mp3',
+        squash: './assets/squash.mp3',
+        time: './assets/time.mp3',
     },
 
     // ------------ Images ---------------
