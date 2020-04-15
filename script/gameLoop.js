@@ -29,11 +29,15 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
-    game.statusBar.update(elapsedTime);
     updateItems_(elapsedTime);
 
-    if(game.checkCollisions)
+    if(game.checkCollisions) {
       checkCollisions_();
+      game.statusBar.update(elapsedTime);
+      if(game.timer < 0) {
+        loseALife_(game.char.getHitCircle());
+      }
+    }
 
     else if(game.char.isDead()) {
       if(game.lives)
@@ -161,6 +165,7 @@ game.gameLoop = function() {
     game.char.setAlive();
     game.char.setPos();
     game.checkCollisions = true;
+    game.timer = game.baseTimer;
   }
 
   function loseALife_(hitCircle) {
