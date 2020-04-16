@@ -311,7 +311,6 @@ game.createObstacleRow = function(
         if(!(hitbox[j].x < 0 || hitbox[j].x > row.width))
           break;
         else if(j === hitbox.length - 1) {
-          // TODO: Make sure that this doesn't throw an error
           row.obstacles.splice(i, 1);
           i--;
           break;

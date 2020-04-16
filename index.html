@@ -19,7 +19,7 @@
       <hr>
       <div class="d-flex justify-content-center">
         <div class="w-50 d-flex flex-column pt-5">
-          <button class="btn btn-lg btn-primary mt-5" onClick="navigate('level-selector');">New Game</button>
+          <button class="btn btn-lg btn-primary mt-5" onClick="game.level = 1; navigate('game-play');">New Game</button>
           <button class="btn btn-lg btn-primary mt-4" onClick="navigate('settings');">Settings</button>
           <button class="btn btn-lg btn-primary mt-4" onClick="navigate('high-scores');">High Scores</button>
           <button class="btn btn-lg btn-primary mt-4" onClick="navigate('about');">About</button>
@@ -101,35 +101,12 @@
 
 
     <div id="game-play" class="screen">
-      <div class="d-flex justify-content-around bg-secondary">
-        <div class="p-2">Your Score: 
-          <span id="my-score"></span>
-        </div>
-        <div class="p-2">High Score: 
-          <span name="high-score"></span>
-        </div>
-        <div class="p-2">Time Left:
-          <span name="time-left"></span>
-        </div>
-      </div>
       <canvas id="canvas-main" width="1024" height="1024"></canvas>
       <button class="btn w-100 btn-secondary" onClick="navigate('main-menu');">Main Menu</button>
     </div>
 
 
     <div id="game-over" class="screen">
-      <div class="d-flex justify-content-around bg-secondary">
-        <div class="p-2">Your Score: 
-          <span id="my-prev-score"></span>
-        </div>
-        <div class="p-2">High Score: 
-          <span name="high-score"></span>
-        </div>
-        <div class="p-2">Time: 
-          <span id="prev-timer"></span>
-        </div>
-      </div>
-
       <h1 class="display-2 text-center text-white pt-5">High Scores</h1>
       <hr>
 

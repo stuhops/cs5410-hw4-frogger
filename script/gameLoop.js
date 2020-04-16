@@ -1,6 +1,7 @@
+// TODO: HIGH SCORES
 // TODO: MAKE INSECTS APPEAR
 // TODO: ALLIGATORS IN END ZONES
-// TODO: SCORING (PER WIKIPEDIA ARTICLE IN DESCRIPTION)
+// TODO: SCORING FOR INSECTS AND ALLIGATORS
 // TODO: VISUAL DIFFERENCE WHEN SELECTING CONTROLS
 // TODO: TEST ON FIREFOX
 
@@ -89,7 +90,7 @@ game.gameLoop = function() {
   function startGameOver_() {
     game.char.setDead();
     game.gameOverTimer = 2000;
-    document.getElementById('my-prev-score').innerHTML = document.getElementById('my-score').innerHTML;
+    manageHighScores(game.score);
     game.gameOver = true;
   }
 
