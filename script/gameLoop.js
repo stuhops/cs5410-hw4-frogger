@@ -1,8 +1,3 @@
-// TODO: MAKE INSECTS APPEAR
-// TODO: ALLIGATORS IN END ZONES
-// TODO: SCORING FOR INSECTS AND ALLIGATORS
-// TODO: TEST ON FIREFOX
-
 game.gameLoop = function() {
   let lastTime = performance.now();
   let requestFrame = true;

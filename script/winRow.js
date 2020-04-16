@@ -38,8 +38,8 @@ game.createWinRow = function(x, y, width, height) {
   };
   row.randomObstacles = {
     arr: [],
-    baseTimer: 5000,
-    timer: 5000,
+    baseTimer: 10000,
+    timer: 10000,
     choices: ['alligator', 'fly'],
   }
 
@@ -87,6 +87,21 @@ game.createWinRow = function(x, y, width, height) {
   // -------------------------------- Getters and Setters----------------------------------
   function getCollisionType(hitCircle) {
     if(hitCircle.center.y < row.height) {
+      for(let i = 0; i < row.randomObstacles.arr.length; i++) {
+        let obst = row.randomObstacles.arr[i].obstacle;
+        let hitbox = obst.getHitbox();
+
+        for(let j = 0; j < hitbox.length - 1; j++) {
+          if(game.collision.lineCircleIntersection(hitbox[j], hitbox[j+1], hitCircle)) {
+            if(!obst.isSafe()) {
+              return ({ type: 0, deltaX: 0, index: i });
+            }
+            else if(row.randomObstacles.arr[i].type === 'fly') {
+              game.score += 200;
+            }
+          }
+        }
+      }
       for(let i = 0; i < row.obstacles.length; i++) {
         let obst = row.obstacles[i];
         let hitbox = obst.getHitbox();
@@ -216,7 +231,8 @@ game.createWinRow = function(x, y, width, height) {
       if(newObstacle !== null) {
         row.randomObstacles.arr.push({
           obstacle: newObstacle,
-          duration: 5000,
+          duration: 8000,
+          type: randomChoice,
         });
       }
 
