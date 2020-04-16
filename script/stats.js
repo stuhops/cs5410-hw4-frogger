@@ -130,6 +130,7 @@ game.createStatusBar = function(width, height, x, y) {
     ];
 
   }
+  updateTimer_(.001);
 
   function updateScore_() {
     row.score.string = 'Score: ' + game.score;

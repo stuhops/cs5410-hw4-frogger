@@ -71,6 +71,7 @@ function newGame() {
     game.gameHeight / game.rows * 1 // height
   );
 
+  console.log('create status bar');
   game.statusBar = game.createStatusBar(
     game.gameWidth,
     game.gameHeight / game.rows,
