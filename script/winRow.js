@@ -181,7 +181,6 @@ game.createWinRow = function(x, y, width, height) {
           i--;
         }
       }
-      console.log(i, row.obstacles[i].isSafe())
     }
   }
 
@@ -199,11 +198,14 @@ game.createWinRow = function(x, y, width, height) {
 
     // -------------- Generate new ------------------
     if(row.randomObstacles.timer < 0) {
+      row.randomObstacles.timer += row.randomObstacles.baseTimer;
       // Find an index to display on
       let randIdx = Math.floor(Math.random() * (5 - row.idxDone));
       let idx = -1;
       for(let i = 0; i <= randIdx; i++) {
         idx++;
+        if(idx > 5) 
+          return;
         if(!row.obstacles[idx].isSafe()) 
           i--;
       }
