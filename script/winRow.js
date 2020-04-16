@@ -204,7 +204,7 @@ game.createWinRow = function(x, y, width, height) {
       let idx = -1;
       for(let i = 0; i <= randIdx; i++) {
         idx++;
-        if(idx > 5) 
+        if(idx > 4) 
           return;
         if(!row.obstacles[idx].isSafe()) 
           i--;

@@ -82,7 +82,9 @@ function newGame() {
 
   document.getElementById('background-music').play();
 
-  game.score = 0;
+  if(game.level === 1)
+    game.score = 0;
+
   game.timer = 30000;
   game.baseTimer = 30000;
   game.lives = 3;
