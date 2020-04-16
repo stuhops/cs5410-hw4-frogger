@@ -19,6 +19,7 @@ game = {
     guts: [],
     baseTimer: 100000,
     timer: 100000,
+    waitTimer: 1000,
 
     // --------- High Scores -------------
     highScores: ['Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed', 'Unclaimed'],

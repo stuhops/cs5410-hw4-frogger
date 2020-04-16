@@ -4,7 +4,7 @@ game.gameLoop = function() {
 
   function processInput() {
     for(input in inputBuffer) {
-      if(!game.char.isDead() && !game.char.isDying()) {
+      if(!game.char.isDead() && !game.char.isDying() && game.waitTimer <= 0) {
         if(input === game.up)
           game.char.setMove('up');
 
@@ -22,6 +22,7 @@ game.gameLoop = function() {
 
 
   function update(elapsedTime) {
+    game.waitTimer -= elapsedTime;
     updateItems_(elapsedTime);
 
     if(game.checkCollisions) {
@@ -186,6 +187,7 @@ game.gameLoop = function() {
 
   function success_(winIndex) {
     game.winRow.setIdxDone(winIndex);
+    game.waitTimer = 1000;
     newLife_();
     if(game.winRow.allIdxDone()) {
       game.score += 1000;
