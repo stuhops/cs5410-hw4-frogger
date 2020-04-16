@@ -77,8 +77,14 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     return obstacle.pos.center;
   }
   let getDeltaX = () => obstacle.speed * .001;
+  let getDimensions = () => {return({width: obstacle.width, height: obstacle.height})};
 
-  let setSafe = safe => obstacle.safe.bool = safe;
+  let setSafe = safe => {
+    obstacle.safe.bool = safe;
+    for(let i = 0; i < obstacle.safe.arr.length; i++) {
+      obstacle.safe.arr[i].bool = safe;
+    }
+  }
 
   let setImg = newImg => {
     obstacle.img.name = newImg;
@@ -194,6 +200,8 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     getHitbox,
     getCenter,
     getDeltaX,
+    getDimensions,
+
 
     setSafe,
     setImg,
