@@ -35,6 +35,12 @@ game.createWinRow = function(x, y, width, height) {
     height: row.height * 3/4,
     spacingOffset: 3*row.width / 44,
     spacing: row.width / 22 * 4.5,
+  };
+  row.randomObstacles = {
+    arr: [],
+    baseTimer: 5000,
+    timer: 5000,
+    choices: ['alligator', 'fly'],
   }
 
   row.audio = {
@@ -51,6 +57,7 @@ game.createWinRow = function(x, y, width, height) {
   // ---------------------------------- Main Functions ------------------------------------
   function update(elapsedTime) {
     updateObstacles_(elapsedTime);
+    updateRandomObstacles_(elapsedTime);
     updateObstaclesLevel2_(elapsedTime);
     updateParticles_(elapsedTime);
   }
@@ -63,6 +70,9 @@ game.createWinRow = function(x, y, width, height) {
     }
     for(let i = 0; i < row.particles.length; i++) {
       row.particles[i].vis.render();
+    }
+    for(let i = 0; i < row.randomObstacles.arr.length; i++) {
+      row.randomObstacles.arr[i].obstacle.render();
     }
     for(let i = 0; i < row.obstaclesLevel2.length; i++) {
       row.obstaclesLevel2[i].render();
@@ -146,6 +156,71 @@ game.createWinRow = function(x, y, width, height) {
           i--;
         }
       }
+    }
+  }
+
+  function updateRandomObstacles_(elapsedTime) {
+    // -------------- Update existing ---------------
+    row.randomObstacles.timer -= elapsedTime;
+    for(let i = 0; i < row.randomObstacles.arr.length; i++) {
+      row.randomObstacles.arr[i].duration -= elapsedTime;
+      row.randomObstacles.arr[i].obstacle.update(elapsedTime);
+      if(row.randomObstacles.arr[i].duration < 0) {
+        row.randomObstacles.arr.splice(i, 1);
+        i--;
+      }
+    }
+
+    // -------------- Generate new ------------------
+    if(row.randomObstacles.timer < 0) {
+      // Find an index to display on
+      let randIdx = Math.floor(Math.random() * (5 - row.idxDone));
+      let idx = -1;
+      for(let i = 0; i <= randIdx; i++) {
+        idx++;
+        if(!row.obstacles[idx].isSafe()) 
+          i--;
+      }
+      let spec = {
+        idx,
+        center: row.obstacles[idx].getCenter(),
+        dimensions: row.obstacles[idx].getDimensions(),
+      };
+
+      // Create an obstacle 
+      let randomChoice = row.randomObstacles.choices[Math.floor(Math.random() * (row.randomObstacles.choices.length + 1))];
+      let newObstacle = null;
+      if(randomChoice === 'alligator') {
+        newObstacle = game.createObstacle(
+          spec.dimensions.width / 2, // width
+          spec.dimensions.height / 2,  // height
+          spec.center.x - spec.dimensions.width/4,  // x
+          spec.center.y,  // y
+          0,  // speedInPixelsPerSecond
+          [{bool: true, img: null, duration: 1000}, {bool: false, img: null, duration: 4000}],  // safe
+          'alligatorHeadClosed' // imgSrc
+        );
+      }
+      else if(randomChoice === 'fly') {
+        newObstacle = game.createObstacle(
+          spec.dimensions.width / 2, // width
+          spec.dimensions.height / 2,  // height
+          spec.center.x - spec.dimensions.width/4,  // x
+          spec.center.y,  // y
+          0,  // speedInPixelsPerSecond
+          [{bool: true, img: null, duration: 3000}],  // safe
+          'fly' // imgSrc
+        );
+      }
+
+      if(newObstacle !== null) {
+        row.randomObstacles.arr.push({
+          obstacle: newObstacle,
+          duration: 5000,
+        });
+      }
+
+      row.randomObstacles.timer += row.randomObstacles.baseTimer;
     }
   }
 

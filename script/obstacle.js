@@ -27,6 +27,7 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
   }
   obstacle.safe = {
     arr: safeArr,
+    override: false,
     bool: safeArr[0].bool,
     iter: 0,
     timer: safeArr[0].duration,
@@ -77,13 +78,16 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     return obstacle.pos.center;
   }
   let getDeltaX = () => obstacle.speed * .001;
-  let getDimensions = () => {return({width: obstacle.width, height: obstacle.height})};
+  let getDimensions = () => {
+    return({
+      width: obstacle.width, 
+      height: obstacle.height
+    });
+  };
 
   let setSafe = safe => {
     obstacle.safe.bool = safe;
-    for(let i = 0; i < obstacle.safe.arr.length; i++) {
-      obstacle.safe.arr[i].bool = safe;
-    }
+    obstacle.safe.override = true;
   }
 
   let setImg = newImg => {
@@ -140,8 +144,9 @@ game.createObstacle = function(width, height, x, y, speedInPixelsPerSecond, safe
     if(obstacle.safe.timer < 0) {
       obstacle.safe.iter = (obstacle.safe.iter + 1) % obstacle.safe.arr.length;
 
-      obstacle.safe.bool = obstacle.safe.arr[obstacle.safe.iter].bool;
       obstacle.safe.timer += obstacle.safe.arr[obstacle.safe.iter].duration;
+      if(!obstacle.safe.override)
+        obstacle.safe.bool = obstacle.safe.arr[obstacle.safe.iter].bool;
     }
   }
 
