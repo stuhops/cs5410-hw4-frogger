@@ -68,7 +68,7 @@ game.gameLoop = function() {
     if(!game.gameOver && requestFrame) {
       requestAnimationFrame(gameLoop);
     }
-    else {
+    else if(requestFrame){
       requestAnimationFrame(gameOver_);
     }
   }
