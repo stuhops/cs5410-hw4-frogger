@@ -102,6 +102,16 @@ game.createWinRow = function(x, y, width, height) {
           }
         }
       }
+      for(let i = 0; i < row.obstaclesLevel2.length; i++) {
+        let obst = row.obstaclesLevel2[i];
+        let hitbox = obst.getHitbox();
+
+        for(let j = 0; j < hitbox.length - 1; j++) {
+          if(game.collision.lineCircleIntersection(hitbox[j], hitbox[j+1], hitCircle)) {
+            return ({ type: 0, deltaX: 0, index: i });
+          }
+        }
+      }
       for(let i = 0; i < row.obstacles.length; i++) {
         let obst = row.obstacles[i];
         let hitbox = obst.getHitbox();
@@ -171,6 +181,7 @@ game.createWinRow = function(x, y, width, height) {
           i--;
         }
       }
+      console.log(i, row.obstacles[i].isSafe())
     }
   }
 
