@@ -88,7 +88,16 @@ game.renderSprite = function(name, center, dimensions, angle, number) {
 
 
       case 'lillyPad': break;
-      case 'fly': break;
+      case 'fly': 
+        game.context.drawImage(
+          game.assets.game_sprites,  // Image
+          84, 172,  // Start clipping x and y
+          42, 46,  // Width and height to clip
+          center.x - dimensions.width/2, center.y - dimensions.height/2,  // Start x and y on canvas
+          dimensions.width + 1.5, dimensions.height + 1.5  // Size x and y on canvas
+        );
+        break;
+
       case 'grass':
         game.context.drawImage(
           game.assets.game_sprites,  // Image
