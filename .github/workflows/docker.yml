@@ -1,0 +1,17 @@
+name: docker
+
+on: 
+  pull_request:
+  push: 
+    branches: [master]
+
+jobs:
+  build-docker:
+    name: Build and run docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build Docker
+        run: |
+          docker build -t frogger .
