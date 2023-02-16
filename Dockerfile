@@ -1,8 +1,5 @@
-FROM node:14
+FROM node:18
 WORKDIR /usr/src/app
-COPY server.js index.html ./
-ADD assets ./assets/
-ADD css ./css/
-ADD script ./script/
-EXPOSE 3000
+COPY . .
+EXPOSE 3100
 CMD ["node", "server.js"]

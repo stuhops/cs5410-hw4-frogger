@@ -18,7 +18,7 @@ let mimeTypes = {
     '.jpg'  :  'image/jpeg',
     '.mp3'  :  'audio/mpeg3'
 };
-const port = 3000;
+const port = 3100;
 
 function handleRequest(request, response) {
     console.log('request : ', request.url);

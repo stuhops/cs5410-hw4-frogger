@@ -1,11 +1,12 @@
 # To Run
-This program uses docker.
-Follow the instructions to install docker <a href="https://docs.docker.com/get-docker/">here</a>.
-Once docker is installed and running, run the following commands:
+
+## Docker compose
+
+For easiest use, use docker compose:
 
 ```
-$ docker build -t frogger /path/to/main/directory
-$ docker run -p 3000:3000 frogger
+docker compose up --build
 ```
 
-The server will start and will be available at `localhost:3000`.
+The server will start and will be available at `localhost:3100`.
+If you would like to use a different port, copy the `example.env` into a `.env` file and change the port number.

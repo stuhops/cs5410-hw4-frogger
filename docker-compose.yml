@@ -1,0 +1,12 @@
+version: "3.8"
+name: "Frogger"
+
+services:
+  client:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    ports:
+      - ${PUBLIC_API_PORT:-3100}:3100
